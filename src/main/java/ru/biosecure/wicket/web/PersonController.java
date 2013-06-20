@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.biosecure.wicket.domain.Person;
-import ru.biosecure.wicket.service.PersonService;
+import ru.biosecure.wicket.global.core.PersonService;
+import ru.biosecure.wicket.global.domain.Person;
 
 import java.util.Map;
 

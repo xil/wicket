@@ -1,6 +1,7 @@
-package ru.biosecure.wicket.service;
+package ru.biosecure.wicket.service.device;
 
 import org.springframework.stereotype.Service;
+import ru.biosecure.wicket.global.device.WicketService;
 
 import java.io.IOException;
 

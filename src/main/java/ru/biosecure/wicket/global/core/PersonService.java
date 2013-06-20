@@ -1,6 +1,6 @@
-package ru.biosecure.wicket.service;
+package ru.biosecure.wicket.global.core;
 
-import ru.biosecure.wicket.domain.Person;
+import ru.biosecure.wicket.global.domain.Person;
 
 import java.util.List;
 

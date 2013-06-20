@@ -3,7 +3,7 @@ package ru.biosecure.wicket.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.biosecure.wicket.domain.Person;
+import ru.biosecure.wicket.global.domain.Person;
 
 import java.util.List;
 

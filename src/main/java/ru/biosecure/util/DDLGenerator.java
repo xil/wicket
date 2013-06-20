@@ -3,8 +3,8 @@ package ru.biosecure.util;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
-import ru.biosecure.wicket.domain.Contact;
-import ru.biosecure.wicket.domain.Person;
+import ru.biosecure.wicket.global.domain.Contact;
+import ru.biosecure.wicket.global.domain.Person;
 
 /**
  * Created with IntelliJ IDEA.

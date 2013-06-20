@@ -1,4 +1,4 @@
-package ru.biosecure.wicket.service;
+package ru.biosecure.wicket.service.device;
 
 import java.io.IOException;
 

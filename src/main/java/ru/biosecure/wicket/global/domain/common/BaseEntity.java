@@ -1,4 +1,4 @@
-package ru.biosecure.wicket.domain.common;
+package ru.biosecure.wicket.global.domain.common;
 
 import org.hibernate.annotations.GenericGenerator;
 

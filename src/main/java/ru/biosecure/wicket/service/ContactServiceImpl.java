@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.biosecure.wicket.dao.ContactDAO;
-import ru.biosecure.wicket.domain.Contact;
+import ru.biosecure.wicket.global.core.ContactService;
+import ru.biosecure.wicket.global.domain.Contact;
 
 import java.util.List;
  

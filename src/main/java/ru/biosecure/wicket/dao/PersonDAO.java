@@ -1,6 +1,6 @@
 package ru.biosecure.wicket.dao;
 
-import ru.biosecure.wicket.domain.Person;
+import ru.biosecure.wicket.global.domain.Person;
 
 import java.util.List;
 

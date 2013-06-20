@@ -1,7 +1,7 @@
-package ru.biosecure.wicket.domain;
+package ru.biosecure.wicket.global.domain;
 
 import org.hibernate.type.BlobType;
-import ru.biosecure.wicket.domain.common.BaseEntity;
+import ru.biosecure.wicket.global.domain.common.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

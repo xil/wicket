@@ -1,6 +1,6 @@
 package ru.biosecure.wicket.dao;
 
-import ru.biosecure.wicket.domain.Contact;
+import ru.biosecure.wicket.global.domain.Contact;
 
 import java.util.List;
 
