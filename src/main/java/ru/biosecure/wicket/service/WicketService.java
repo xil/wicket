@@ -1,4 +1,4 @@
-package net.schastny.contactmanager.service;
+package ru.biosecure.wicket.service;
 
 
 import java.io.IOException;

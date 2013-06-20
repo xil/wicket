@@ -1,7 +1,6 @@
-package net.schastny.contactmanager.service;
+package ru.biosecure.wicket.service;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
 
 public class LPTComm {
 

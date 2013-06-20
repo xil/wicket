@@ -1,9 +1,9 @@
-package net.schastny.contactmanager.web;
+package ru.biosecure.wicket.web;
 
-import net.schastny.contactmanager.service.WicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.biosecure.wicket.service.WicketService;
 
 import java.io.IOException;
 

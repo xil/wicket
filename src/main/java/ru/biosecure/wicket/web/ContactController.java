@@ -1,4 +1,4 @@
-package net.schastny.contactmanager.web;
+package ru.biosecure.wicket.web;
 
 import org.springframework.stereotype.Controller;
 

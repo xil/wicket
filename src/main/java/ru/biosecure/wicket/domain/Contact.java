@@ -1,4 +1,4 @@
-package net.schastny.contactmanager.domain;
+package ru.biosecure.wicket.domain;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
-package net.schastny.contactmanager.dao;
+package ru.biosecure.wicket.dao;
 
-import net.schastny.contactmanager.domain.Person;
+import ru.biosecure.wicket.domain.Person;
 
 import java.util.List;
 

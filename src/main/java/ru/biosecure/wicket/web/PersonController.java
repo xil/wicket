@@ -1,7 +1,5 @@
-package net.schastny.contactmanager.web;
+package ru.biosecure.wicket.web;
 
-import net.schastny.contactmanager.domain.Person;
-import net.schastny.contactmanager.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.biosecure.wicket.domain.Person;
+import ru.biosecure.wicket.service.PersonService;
 
 import java.util.Map;
 

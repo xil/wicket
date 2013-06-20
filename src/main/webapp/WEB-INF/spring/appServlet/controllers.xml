@@ -7,6 +7,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Определяем папку, в которой будем искать веб компоненты (контроллеры)-->
-	<context:component-scan base-package="net.schastny.contactmanager.web" />
+	<context:component-scan base-package="ru.biosecure.wicket.web" />
 	 
 </beans>

@@ -1,10 +1,10 @@
-package net.schastny.contactmanager.service;
+package ru.biosecure.wicket.service;
 
-import net.schastny.contactmanager.dao.ContactDAO;
-import net.schastny.contactmanager.domain.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.biosecure.wicket.dao.ContactDAO;
+import ru.biosecure.wicket.domain.Contact;
 
 import java.util.List;
  

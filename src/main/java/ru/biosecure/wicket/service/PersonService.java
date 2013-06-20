@@ -1,6 +1,6 @@
-package net.schastny.contactmanager.service;
+package ru.biosecure.wicket.service;
 
-import net.schastny.contactmanager.domain.Person;
+import ru.biosecure.wicket.domain.Person;
 
 import java.util.List;
 
