@@ -1,0 +1,1 @@
+its generator create ddl script from entities

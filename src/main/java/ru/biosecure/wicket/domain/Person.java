@@ -1,47 +1,35 @@
 package ru.biosecure.wicket.domain;
 
 import org.hibernate.type.BlobType;
+import ru.biosecure.wicket.domain.common.BaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "PERSON")
+public class Person extends BaseEntity{
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
-    private Integer id;
-
-    @Column(name = "firstname")
+    @Column(name = "FIRSTNAME")
     private String firstname;
 
-    @Column(name = "middlename")
+    @Column(name = "MIDDLENAME")
     private String middlename;
 
-    @Column(name = "lastname")
+    @Column(name = "LASTNAME")
     private String lastname;
 
-    @Column(name = "department_id")
-    private String depID;
-
-    @Column(name = "regdate")
+    @Column(name = "REGDATE")
     @GeneratedValue
     private String regdate;
 
-    @Column(name = "expdate")
+    @Column(name = "EXPDATE")
     private String expdate;
 
-    @Column(name = "photo")
+    @Column(name = "PHOTO")
     private BlobType photo;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;
@@ -65,14 +53,6 @@ public class Person {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getDepID() {
-        return depID;
-    }
-
-    public void setDepID(String depID) {
-        this.depID = depID;
     }
 
     public String getRegdate() {
