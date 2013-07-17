@@ -39,12 +39,6 @@
 			<td><form:input path="middlename" /></td>
 		</tr>
 		<tr>
-			<td><form:label path="photo">
-				<spring:message code="label.photo" />
-			</form:label></td>
-			<td><form:input path="photo" /></td>
-		</tr>
-		<tr>
 			<td colspan="2"><input type="submit"
 				value="<spring:message code="label.addcontact"/>" /></td>
 		</tr>
@@ -66,7 +60,6 @@
 		    <th><spring:message code="label.last" /></th>
 			<th><spring:message code="label.firstname" /></th>
 			<th><spring:message code="label.middle" /></th>
-			<th><spring:message code="label.photo" /></th>
 			<th>&nbsp;</th>
 		</tr>
 		<c:forEach items="${personList}" var="person">
@@ -74,7 +67,6 @@
 				<td>${person.lastname}</td>
 				<td>${person.firstname}</td>
 				<td>${person.middlename}</td>
-				<td>${person.photo}</td>
 				<td><a href="delete/${person.id}"><spring:message code="label.delete" /></a></td>
 			</tr>
 		</c:forEach>

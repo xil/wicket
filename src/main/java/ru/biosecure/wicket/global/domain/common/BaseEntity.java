@@ -18,10 +18,9 @@ import java.util.UUID;
 public class BaseEntity implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(length = 16, name = "ID", unique = true, nullable = false)
-    protected UUID id;
+    @GeneratedValue
+    @Column(name = "ID", unique = true, nullable = false)
+    protected long id;
 
     @Column(name = "CREATED_BY", length = 60)
     protected String createdBy;
@@ -44,11 +43,11 @@ public class BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     protected Date deleteDate;
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -10,5 +10,5 @@ public interface PersonDAO {
 
     public List<Person> listPerson();
 
-    public void removePerson(Integer id);
+    public void removePerson(long id);
 }

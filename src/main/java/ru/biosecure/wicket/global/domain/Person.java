@@ -21,16 +21,6 @@ public class Person extends BaseEntity{
     @Column(name = "LASTNAME")
     private String lastname;
 
-    @Column(name = "REGDATE")
-    @GeneratedValue
-    private String regdate;
-
-    @Column(name = "EXPDATE")
-    private String expdate;
-
-    @Column(name = "PHOTO")
-    private BlobType photo;
-
     public String getFirstname() {
         return firstname;
     }
@@ -53,29 +43,5 @@ public class Person extends BaseEntity{
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getRegdate() {
-        return regdate;
-    }
-
-    public void setRegdate(String regdate) {
-        this.regdate = regdate;
-    }
-
-    public String getExpdate() {
-        return expdate;
-    }
-
-    public void setExpdate(String expdate) {
-        this.expdate = expdate;
-    }
-
-    public BlobType getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(BlobType photo) {
-        this.photo = photo;
     }
 }

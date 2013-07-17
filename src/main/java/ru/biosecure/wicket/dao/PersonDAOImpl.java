@@ -24,7 +24,7 @@ public class PersonDAOImpl implements PersonDAO {
                 .list();
     }
 
-    public void removePerson(Integer id) {
+    public void removePerson(long id) {
         Person person = (Person) sessionFactory.getCurrentSession().load(
                 Person.class, id);
         if (null != person) {
