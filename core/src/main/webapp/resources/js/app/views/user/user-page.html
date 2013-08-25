@@ -1,0 +1,27 @@
+<div>
+    <table data-dojo-type="dojox.grid.DataGrid">
+        <thead>
+        <tr>
+            <th field="login" width="20%">${messages.userBrowser.grid.login}</th>
+            <th field="rolename" width="80%">${messages.userBrowser.grid.rolename}</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+
+<section>
+    <header>
+        <h2>dfsdfs</h2>
+    </header>
+    <section>
+        <p data-dojo-type="dojox/mvc/Group" data-dojo-props="target: this.model">
+            Current count: <span data-dojo-type="dojox.mvc.Output"
+                                 data-dojo-props="value: at(this.model.counts, 'currentCount')"></span><br/>
+            Max count: <span data-dojo-type="dojox/mvc/Output"
+                             data-dojo-props="value: at(this.model.counts, 'maxCount')"></span>
+        </p>
+    </section>
+    <footer>
+    </footer>
+</section>

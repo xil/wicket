@@ -1,0 +1,4 @@
+<Context path="/"
+         docBase="/home/inver/Development/ee/biosecure/wicket/web/src/main/webapp/resources"
+         debug="0" privileged="true">
+</Context>

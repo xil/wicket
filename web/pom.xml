@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ru.biosecure.wicket</groupId>
+        <artifactId>main</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <artifactId>web</artifactId>
+    <packaging>war</packaging>
+    <name>BioWicket web module</name>
+
+    <properties>
+        <!--<hibernate.javax.persistence>1.0.1.Final</hibernate.javax.persistence>-->
+        <dojo.version>1.9.1</dojo.version>
+        <dojo.sources.location>src/main/webapp/resources/js/lib</dojo.sources.location>
+        <downloadPlugin.version>1.1.0</downloadPlugin.version>
+    </properties>
+
+    <dependencies>
+        <!--<dependency>-->
+        <!--<groupId>${project.groupId}</groupId>-->
+        <!--<artifactId>global</artifactId>-->
+        <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>${project.groupId}</groupId>-->
+        <!--<artifactId>core</artifactId>-->
+        <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.dojotoolkit</groupId>-->
+        <!--<artifactId>dojo</artifactId>-->
+        <!--<version>${dojo.version}</version>-->
+        <!--</dependency>-->
+    </dependencies>
+    <profiles>
+        <!--Development profile. It is active by default-->
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>dev</name>
+                </property>
+            </activation>
+            <properties>
+                <tomcat.version>7.0.42</tomcat.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <warName>wicket</warName>
+                            <warSourceExcludes>resources/**</warSourceExcludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <version>2.1</version>
+                        <configuration>
+                            <port>8080</port>
+                            <path>/</path>
+                            <staticContextDocbase>resources/</staticContextDocbase>
+                            <staticContextPath>/resources</staticContextPath>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>prod</name>
+                </property>
+            </activation>
+        </profile>
+    </profiles>
+    <build>
+
+        <plugins>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+                <!--<version>2.1</version>-->
+                <!--<configuration>-->
+                    <!--<port>8080</port>-->
+                    <!--<path>/</path>-->
+                    <!--&lt;!&ndash;TODO&ndash;&gt;-->
+                    <!--&lt;!&ndash;<contextFile></contextFile>&ndash;&gt;-->
+                    <!--<systemProperties>-->
+                        <!--<appserver.base></appserver.base>-->
+                    <!--</systemProperties>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--TODO-->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-dependency-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>unpackDojo</id>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<goals>-->
+            <!--<goal>unpack</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<artifactItems>-->
+            <!--<artifactItem>-->
+            <!--<groupId>org.dojotoolkit</groupId>-->
+            <!--<artifactId>dojo</artifactId>-->
+            <!--<version>${dojo.version}</version>-->
+            <!--<type>zip</type>-->
+            <!--<outputDirectory>-->
+            <!--${dojo.sources.location}-->
+            <!--</outputDirectory>-->
+            <!--</artifactItem>-->
+            <!--</artifactItems>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<groupId>com.googlecode.maven-download-plugin</groupId>-->
+            <!--<artifactId>maven-download-plugin</artifactId>-->
+            <!--<version>${downloadPlugin.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--&lt;!&ndash; the wget goal actually binds itself to this phase by default &ndash;&gt;-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<goals>-->
+            <!--<goal>wget</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<url>http://download.dojotoolkit.org/release-1.9.1/dojo-release-1.9.1-src.zip</url>-->
+            <!--<outputFileName>foo.bar</outputFileName>-->
+            <!--&lt;!&ndash; default target location, just to demonstrate the parameter &ndash;&gt;-->
+            <!--<targetDirectory>${project.build.directory}</targetDirectory>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--<execution>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<goals>-->
+            <!--<goal>wget</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<url>http://download.dojotoolkit.org/release-1.9.1/dojo-release-1.9.1.zip</url>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+
+</project>

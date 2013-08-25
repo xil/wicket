@@ -1,0 +1,45 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+    <context:property-placeholder properties-ref="deployProperties"/>
+
+    <!-- Activates various annotations -->
+    <context:annotation-config/>
+
+    <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
+    <context:component-scan base-package="ru.biosecure.wicket.core"/>
+    <context:component-scan base-package="ru.biosecure.wicket.global"/>
+
+    <!-- Configures the annotation-driven Spring MVC Controller programming model -->
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!-- Declare a view resolver -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/views/"
+          p:suffix=".jsp"
+          p:order="1"
+          p:contentType="text/html;charset=UTF-8"/>
+
+    <!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
+    <import resource="data/data.xml"/>
+
+    <!--TODO add for normal logging-->
+    <!--<import resource="logging/trace-context.xml"/>-->
+
+    <bean id="deployProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+          p:location="/WEB-INF/app.properties"/>
+
+</beans>

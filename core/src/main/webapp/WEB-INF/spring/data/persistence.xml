@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="hibernatePersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+        </properties>
+        <mapping-file>/WEB-INF/spring/data/orm.xml</mapping-file>
+        <class>ru.biosecure.wicket.global.core.entities.security.User</class>
+        <class>ru.biosecure.wicket.global.core.entities.security.Role</class>
+        <class>ru.biosecure.wicket.global.core.entities.security.Permission</class>
+        <class>ru.biosecure.wicket.global.core.entities.Person</class>
+        <class>ru.biosecure.wicket.global.core.entities.scanner.ScannerTask</class>
+    </persistence-unit>
+</persistence>
