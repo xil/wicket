@@ -40,6 +40,21 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!--<servlet>-->
+        <!--<servlet-name>restServlet</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>/WEB-INF/spring/servletContext.xml</param-value>-->
+        <!--</init-param>-->
+        <!--&lt;!&ndash;<load-on-startup>1</load-on-startup>&ndash;&gt;-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>restServlet</servlet-name>-->
+        <!--<url-pattern>/ws/rest/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <!-- Фильтр для перекодировки в utf8 -->
     <filter>
         <filter-name>charsetFilter</filter-name>

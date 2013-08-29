@@ -5,25 +5,32 @@
 define([
     "dojo/_base/declare", "dojo/_base/lang",
     "views/common/AbstractView"
-    , "dijit/Dialog"
-], function (declare, lang, AbstractView, Dialog) {
-        return declare([Dialog], {
+    , "dijit/Dialog", "dojox/mvc/Group", "dijit/form/TextBox"
+], function (declare, lang, AbstractView, Dialog, Group, TextBox) {
+    return declare([Dialog], {
 
-            constructor: function (options) {
-                lang.mixin(this, options);
+        constructor: function (options) {
+            lang.mixin(this, options);
 
-                var self = this;
-                var contentWidget = new (declare([AbstractView],
-                    {
-                        templateString: self.templateString,
-                        ctrl: self.ctrl
-                    }
-                ));
-                contentWidget.startup();
-                var content = this.content = contentWidget;
-            },
-            postCreate: function () {
-                this.inherited(arguments);
+            var initParams = this.contentParams;
+            this.ctrl = initParams.ctrl;
+            var contentWidget = new (declare([AbstractView],
+                {
+                    templateString: initParams.templateString,
+                    ctrl: initParams.ctrl
+                }
+            ));
+            contentWidget.startup();
+            var content = this.content = contentWidget;
+        },
+        postCreate: function () {
+            this.inherited(arguments);
+
+            var commitButton = this.content.commitButton;
+            this.connect(commitButton, "onClick", "commit");
+            commitButton.set("label", "Commit");
+            var cancelButton = this.content.cancelButton;
+            this.connect(cancelButton, "onClick", "cancel");
 
 //                var self = this;
 //                var contentWidget = new (declare([AbstractView],
@@ -34,8 +41,13 @@ define([
 //                contentWidget.startup();
 //                var content = this.content = contentWidget;
 
-            }
-        });
-    }
-)
-;
+        },
+        commit: function () {
+            this.ctrl.commit();
+            this.hide();
+        },
+        cancel: function () {
+            this.hide();
+        }
+    });
+});

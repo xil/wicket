@@ -7,34 +7,36 @@ define([
 
     "controllers/common/AbstractController",
 
-    "./UserEditorView", "dojox/data/JsonRestStore", "dojo/data/ItemFileReadStore"
-    , "dojox/mvc/EditStoreRefController"
-], function (declare, lang, when, AbstractController, UserEditorView, JsonRestStore, ItemFileReadStore, EditStoreRefController) {
+    "./UserEditorView", "dojo/store/JsonRest", "dojo/data/ItemFileReadStore"
+    , "dojox/mvc/EditStoreRefController", "dojox/mvc/getPlainValue", "dojox/mvc/getStateful"
+], function (declare, lang, when, AbstractController, UserEditorView, JsonRest, ItemFileReadStore, EditStoreRefController, getPlainValue, getStateful) {
     return declare("controllers.user.UserBrowser", [AbstractController, EditStoreRefController], {
 
         _viewTemplateString: "ws/rest/user/editTemplate",
         currentTab: null,
         view: null,
+        itemId: null,
 
         init: function () {
-            this.store = new JsonRestStore({target: "/ws/rest/user/1"});
             this.holdModelUntilCommit = true;
+            this.store = new JsonRest({target: "ws/rest/user/"});
 
-            when(this.queryStore(), lang.hitch(this, function () {
-                this.view = new UserEditorView(this._getViewParams());
-                var view = this.view;
-                this.currentTab.addChild(view);
-                view.startup();
-                view.show();
-            }));
-
-
-//            this.queryStore();
-//
-//            when(this.storeController.queryStore(), function () {
-//                this.view.startup();
-//            });
+            if (!this.itemId) {
+                var item = getStateful({firstname: "", middlename: "", lastname: ""});
+                this.set(this._refSourceModelProp, item);
+                this._openView();
+            } else {
+                when(this.getStore(this.itemId), lang.hitch(this, function () {
+                    this._openView();
+                }));
+            }
             this._addListeners();
+        },
+        _openView: function () {
+            this.view = new UserEditorView(this._getViewParams());
+            var view = this.view;
+            view.startup();
+            view.show();
         },
         _addListeners: function () {
 //            this.mainPane.on("clickMenuBarItem_logout", function () {
@@ -49,16 +51,18 @@ define([
             };
             var viewStore = new ItemFileReadStore(storeParams);
             var params = {
-                currentTab: self.currentTab,
-                app: this.app,
-                templateString: self._getTemplateString(),
-                viewStore: viewStore,
-                ctrl: self,
-                style: {}
-
+                contentParams: {
+                    currentTab: self.currentTab,
+                    app: this.app,
+                    templateString: self._getTemplateString(),
+                    viewStore: viewStore,
+                    ctrl: self,
+                    style: {}
+                }
             };
             return params;
         }
 
     });
-});
+})
+;

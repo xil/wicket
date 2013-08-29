@@ -1,10 +1,7 @@
 package ru.biosecure.wicket.core.web.common;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ru.biosecure.wicket.core.repo.PersonRepository;
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.security.User;
@@ -43,33 +40,8 @@ public class UserController implements SimpleController {
 
     @Override
     @RequestMapping("/template")
-    @ResponseBody
     public String getScreenTemplate() {
-//        return "<div id=\"gridContainer\"></div>";
-        return "<div id=\"userBrowserLayout\" data-dojo-type=\"dijit/layout/LayoutContainer\"\n" +
-                "     data-dojo-props=\"design:'headline'\">\n" +
-                "    <div class=\"${baseClass}Title\" data-dojo-attach-point=\"titleNode\" data-dojo-type=\"dijit.layout.ContentPane\"\n" +
-                "         data-dojo-props=\"region:'top'\">\n" +
-                "        <button data-dojo-attach-point=\"createButton\" data-dojo-type=\"dijit/form/ToggleButton\">Create</button>\n" +
-                "        <button data-dojo-attach-point=\"editButton\" data-dojo-type=\"dijit/form/ToggleButton\">Edit</button>\n" +
-                "        <button data-dojo-attach-point=\"removeButton\" data-dojo-type=\"dijit/form/ToggleButton\">Remove</button>\n" +
-                "        <button data-dojo-attach-point=\"refreshButton\" data-dojo-type=\"dijit/form/ToggleButton\">Refresh</button>\n" +
-                "    </div>\n" +
-                "    <div data-dojo-type=\"dijit.layout.ContentPane\" class=\"${baseClass}Container\"\n" +
-                "         data-dojo-attach-point=\"containerNode\" data-dojo-props=\"region:'center'\">\n" +
-                "        <table id=\"usersGrid\" data-dojo-type=\"dojox.grid.DataGrid\" data-dojo-attach-point=\"usersGrid\"\n" +
-                "               data-dogo-id=\"grid\" class=\"grid\" autoHeight=\"15\">\n" +
-                "            <thead>\n" +
-                "                <tr>\n" +
-                "                    <th field=\"id\">Id</th>\n" +
-                "                    <th field=\"firstName\">Firstname</th>\n" +
-                "                    <th field=\"middlename\">Middlename</th>\n" +
-                "                    <th field=\"lastname\">Lastname</th>\n" +
-                "                </tr>\n" +
-                "            </thead>\n" +
-                "        </table>\n" +
-                "    </div>\n" +
-                "</div>\n";
+        return "userBrowser";
     }
 
     @RequestMapping("/editTemplate")
@@ -82,5 +54,21 @@ public class UserController implements SimpleController {
     @ResponseBody
     public Person getPerson(@PathVariable String userId) {
         return personRepository.findOne(Long.parseLong(userId));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
+    public Person savePerson(@RequestBody Person item) {
+        if (item != null && personRepository.findOne(item.getId()) != null) {
+            personRepository.save(item);
+            return personRepository.findOne(item.getId());
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
+    public void addPerson(@RequestBody Person item) {
+        personRepository.save(item);
     }
 }

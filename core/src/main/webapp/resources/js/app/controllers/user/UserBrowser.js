@@ -22,18 +22,26 @@ define([
 
 //            TODO rework it!
             this.view = new UserBrowserView(this._getViewParams());
-            this.currentTab.addChild(this.view);
+//            this.currentTab.addChild(this.view);
+            this.view.placeAt(this.currentTab);
             this.view.startup();
             this._addListeners();
         },
         _addListeners: function () {
             this.view.on("create", lang.hitch(this, function (params) {
-                var editor = new UserEditor({});
-                editor.init();
+                this._openEditor(null);
             }));
-//            this.mainPane.on("clickMenuBarItem_logout", function () {
-//                window.location.href = "/logout";
-//            });
+            this.view.on("edit", lang.hitch(this, function (params) {
+                var selectedId = this.view.selectedRowId;
+                this._openEditor(this.view.getSelectedId(selectedId));
+            }));
+            this.view.on("refresh", lang.hitch(this, function (params) {
+                this.view.refresh();
+            }));
+        },
+        _openEditor: function (itemId) {
+            var editor = new UserEditor({itemId: itemId});
+            editor.init();
         },
         _getViewParams: function () {
             var self = this;
@@ -41,7 +49,7 @@ define([
             var storeParams = {
                 url: "ws/rest/user/list"
             };
-            var viewStore = new ItemFileReadStore(storeParams);
+            var viewStore = this.userStore = new ItemFileReadStore(storeParams);
             var params = {
                 currentTab: self.currentTab,
                 app: this.app,
@@ -55,4 +63,5 @@ define([
         }
 
     });
-});
+})
+;
