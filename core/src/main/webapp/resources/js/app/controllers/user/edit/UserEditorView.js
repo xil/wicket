@@ -3,11 +3,11 @@
  * Date: 06.07.13 22:37
  */
 define([
-    "dojo/_base/declare", "dojo/_base/lang",
+    "dojo/_base/declare", "dojo/_base/lang", "dojo/Evented",
     "views/common/AbstractView"
-    , "dijit/Dialog", "dojox/mvc/Group", "dijit/form/TextBox"
-], function (declare, lang, AbstractView, Dialog, Group, TextBox) {
-    return declare([Dialog], {
+    , "dijit/Dialog", "dojox/mvc/Group", "dijit/form/Form", "dijit/form/ValidationTextBox"
+], function (declare, lang, Evented, AbstractView, Dialog, Group) {
+    return declare([Dialog, Evented], {
 
         constructor: function (options) {
             lang.mixin(this, options);
@@ -43,11 +43,16 @@ define([
 
         },
         commit: function () {
-            this.ctrl.commit();
-            this.hide();
+//            TODO check validation
+            if (this.content.form.validate()) {
+                this.ctrl.commit();
+                this.hide();
+                this.emit("commitAction", {});
+            }
         },
         cancel: function () {
             this.hide();
+            this.emit("closeAction", {});
         }
     });
 });

@@ -25,32 +25,11 @@ define([
         constructor: function () {
             this.mainController = new MainController({app: this});
             this.mainController.init();
-
-//            this.loginController = new LoginController();
-//
-//            if (!this._checkAuth()) {
-//                this.loginController.init();
-//                this.loginController.on("loginSuccess", lang.hitch(this, function () {
-//                    this._loginSuccess();
-//                }));
-//            } else {
-//                this._loginSuccess();
-//            }
         },
         init: function () {
 
         },
-
-        _checkAuth: function () {
-//TODO check auth
-            return false;
-        },
-        _loginSuccess: function () {
-//            this.userPageController = new UserPageController({});
-//            this.userPageController.init();
-        },
-
-        _loadingAppContext: function() {
+        initErrorHandler: function() {
 
         }
     });

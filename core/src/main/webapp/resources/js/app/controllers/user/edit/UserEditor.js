@@ -37,6 +37,14 @@ define([
             var view = this.view;
             view.startup();
             view.show();
+
+            var self = this;
+            view.on("commitAction", function(params) {
+                self.emit("commitAction", {});
+            });
+            view.on("closeAction", function(params) {
+                self.emit("closeAction", {});
+            });
         },
         _addListeners: function () {
 //            this.mainPane.on("clickMenuBarItem_logout", function () {

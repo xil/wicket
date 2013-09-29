@@ -31,11 +31,12 @@ public class UserController implements SimpleController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public Map<String, Object> getAll() {
-        Map<String, Object> resMap = new HashMap<String, Object>();
-        resMap.put("id", "id");
-        resMap.put("items", personRepository.findAll());
-        return resMap;
+    public List<Person> getAll() {
+//        Map<String, Object> resMap = new HashMap<String, Object>();
+//        resMap.put("id", "id");
+//        resMap.put("items", personRepository.findAll());
+//        return resMap;
+        return personRepository.findAll();
     }
 
     @Override
@@ -70,5 +71,11 @@ public class UserController implements SimpleController {
     @ResponseBody
     public void addPerson(@RequestBody Person item) {
         personRepository.save(item);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deletePerson(@PathVariable String userId) {
+        personRepository.delete(Long.parseLong(userId));
     }
 }

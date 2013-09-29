@@ -22,7 +22,7 @@ define([
             menuWidget: null,
             tabContainer: null,
             tabContainerInitialized: false,
-            tabs: {},
+            tabs: [],
 
             constructor: function (options) {
                 lang.mixin(this, options);
@@ -37,7 +37,6 @@ define([
                 this.menuWidget.addChild(this._createMenubarButton('wicket'));
                 this.menuWidget.addChild(this._createMenubarButton('users'));
                 this.menuWidget.addChild(this._createMenubarButton('idents'));
-//                this.menuWidget.addChild(this._createUserMenubarLabel("userLabel"));
                 this.menuWidget.addChild(this._createMenubarButton("logout"));
                 this.menu.addChild(this.menuWidget);
             },
@@ -49,16 +48,22 @@ define([
             },
             addTab: function (caption, viewId) {
                 var tabContent = false;
-                if (!this.tabs[viewId]) {
+                var tabs = this.tabs;
+                if (!tabs[viewId]) {
+                    var self = this;
                     tabContent = new ContentPane({
-                        title: caption/*,
-                        content: '<div id="' + viewId + '" height="100%" width="100%"></div>'*/
+                        title: caption,
+                        closable: true,
+                        onClose: function () {
+                            delete tabs[viewId];
+                            return true;
+                        }
                     });
-                    this.tabs[viewId] = tabContent;
+                    tabs[viewId] = tabContent;
                     this.tabContainer.addChild(tabContent);
                     this.tabContainer.startup();
                 }
-                this.tabContainer.selectChild(this.tabs[viewId]);
+                this.tabContainer.selectChild(tabs[viewId]);
                 return tabContent;
             },
             _createUserMenubarLabel: function (id) {
@@ -69,8 +74,7 @@ define([
                     onClick: function () {
                         self.emit("clickMenuBarItem_" + id, {});
                     },
-                    templateString:
-                        '<div class="dijitReset dijitInline dijitMenuItemLabel"\
+                    templateString: '<div class="dijitReset dijitInline dijitMenuItemLabel"\
                          tabIndex = "-1" >\
                     <span data-dojo-attach-point="containerNode,textDirNode"></span> </div>'
                 });

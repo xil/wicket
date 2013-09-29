@@ -3,18 +3,40 @@
 <div id="userEditView">
     <%--<form data-dojo-type="dojox/form/Manager">--%>
     <div class="dijitDialogPaneContentArea">
-        <div data-dojo-attach-point="contentNode">
-            <form data-dojo-type="dojox/mvc/Group" data-dojo-props="target: at(this.ctrl,'model')">
-                <input type="text" data-dojo-attach-point="firstname" data-dojo-type="dijit/form/TextBox"
-                       data-dojo-props="value: at('rel:', 'firstname')"/>
-                <input type="text" data-dojo-attach-point="middlename" data-dojo-type="dijit/form/TextBox"
-                       data-dojo-props="value: at('rel:', 'middlename')"/>
-                <input type="text" data-dojo-attach-point="lastname" data-dojo-type="dijit/form/TextBox"
-                       data-dojo-props="value: at('rel:', 'lastname')"/>
-                <%--<input type="button" data-dojo-attach-point="commitButton" data-dojo-type="dijit/form/Button"/>--%>
-                <%--<input type="button" data-dojo-attach-point="cancelButton" data-dojo-type="dijit/form/Button"/>--%>
-            </form>
-        </div>
+        <form data-dojo-type="dijit/form/Form" data-dojo-attach-point="form">
+            <div data-dojo-attach-point="contentNode" data-dojo-type="dojox/mvc/Group"
+                 data-dojo-props="target: at(this.ctrl,'model')">
+
+                <table class="form">
+                    <tr>
+                        <%--TODO i18n!!!!!--%>
+                        <td>First Name</td>
+                        <td>
+                            <input type="text" data-dojo-attach-point="firstname"
+                                   data-dojo-type="dijit/form/ValidationTextBox"
+                                   data-dojo-props="value: at('rel:', 'firstname'), required: true, maxLength: 64, trim: true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Middle Name</td>
+                        <td>
+                            <input type="text" data-dojo-attach-point="firstname"
+                                   data-dojo-type="dijit/form/ValidationTextBox"
+                                   data-dojo-props="value: at('rel:', 'middlename'), required: true, maxLength: 64, trim: true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>
+                            <input type="text" data-dojo-attach-point="firstname"
+                                   data-dojo-type="dijit/form/ValidationTextBox"
+                                   data-dojo-props="value: at('rel:', 'lastname'), required: true, maxLength: 64, trim: true"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
     </div>
     <div class="dijitDialogPaneActionBar">
         <div class="message" data-dojo-attach-point="messageNode"></div>

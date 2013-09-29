@@ -21,14 +21,7 @@ public class MediatorController {
     }
 
     @RequestMapping("/app/mainTemplate")
-    @ResponseBody
     public String getTemplate() {
-        String template = "<div>" +
-                "<div id=\"appLayout\" data-dojo-type=\"dijit/layout/LayoutContainer\" data-dojo-attach-point=\"mainLayout\" data-dojo-props=\"design:'headline'\">\n" +
-                "    <div data-dojo-type=\"dijit/layout/ContentPane\" data-dojo-attach-point=\"menu\" data-dojo-props=\"region:'top'\"></div>\n" +
-                "    <div data-dojo-type=\"dijit/layout/ContentPane\" data-dojo-attach-point=\"mainArea\"\n" +
-                "         data-dojo-props=\"region: 'center'\"></div>\n" +
-                "</div></div>";
-        return template;
+        return "mainPane";
     }
 }

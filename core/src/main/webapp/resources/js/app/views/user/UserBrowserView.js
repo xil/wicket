@@ -35,7 +35,7 @@ define([
             },
             _initGrid: function () {
                 var self = this;
-                this.usersGrid.setStore(this.viewStore);
+                this.usersGrid.setStore(this.viewStore, "list");
                 this.usersGrid.on("rowClick", lang.hitch(this, function (e) {
                     this.selectedRowId = e.rowIndex;
                 }));
@@ -48,7 +48,11 @@ define([
                 this.emit(action, {});
             },
             getSelectedId: function (id) {
-                return this.usersGrid.getItem(id).id[0];
+                return this.usersGrid.getItem(id).id;
+            },
+            getSelectedItem: function() {
+//                TODO null checking
+                return this.usersGrid.getItem(this.selectedRowId);
             },
             refresh: function () {
                 this.usersGrid.setQuery({id: "*"});
