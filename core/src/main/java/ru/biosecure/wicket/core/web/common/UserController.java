@@ -1,17 +1,15 @@
 package ru.biosecure.wicket.core.web.common;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.biosecure.wicket.core.repo.PersonRepository;
-import ru.biosecure.wicket.global.core.entities.Person;
-import ru.biosecure.wicket.global.core.entities.security.User;
 import ru.biosecure.wicket.core.repo.UserRepository;
 import ru.biosecure.wicket.core.web.SimpleController;
+import ru.biosecure.wicket.global.core.entities.Person;
 
 import javax.inject.Inject;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,6 +21,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ws/rest/user")
 public class UserController implements SimpleController {
+    private final Logger logger = Logger.getLogger(getClass());
 
     @Inject
     private UserRepository userRepository;
@@ -32,10 +31,6 @@ public class UserController implements SimpleController {
     @RequestMapping("/list")
     @ResponseBody
     public List<Person> getAll() {
-//        Map<String, Object> resMap = new HashMap<String, Object>();
-//        resMap.put("id", "id");
-//        resMap.put("items", personRepository.findAll());
-//        return resMap;
         return personRepository.findAll();
     }
 

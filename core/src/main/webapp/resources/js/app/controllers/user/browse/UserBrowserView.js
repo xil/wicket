@@ -50,7 +50,7 @@ define([
             getSelectedId: function (id) {
                 return this.usersGrid.getItem(id).id;
             },
-            getSelectedItem: function() {
+            getSelectedItem: function () {
 //                TODO null checking
                 return this.usersGrid.getItem(this.selectedRowId);
             },

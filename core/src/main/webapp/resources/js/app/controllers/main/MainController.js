@@ -24,7 +24,7 @@ define([
                 window.location.href = "logout";
             });
             this.mainPane.on("clickMenuBarItem_users", lang.hitch(this, function () {
-                require(["controllers/user/UserBrowser"], function (UserBrowser) {
+                require(["controllers/user/browse/UserBrowser"], function (UserBrowser) {
                     var currentTab = self.mainPane.addTab("Users", "usersBrowser");
                     if (currentTab) {
                         var usersController = new UserBrowser({currentTab: currentTab});

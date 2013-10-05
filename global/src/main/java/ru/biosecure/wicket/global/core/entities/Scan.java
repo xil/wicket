@@ -8,8 +8,16 @@ package ru.biosecure.wicket.global.core.entities;
  * To change this template use File | Settings | File Templates.
  */
 
+import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Scan from device
  */
-public class Scan {
+
+@Entity
+@Table(name = "SCAN")
+public class Scan extends BaseEntity {
 }

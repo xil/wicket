@@ -1,160 +1,209 @@
+ALTER TABLE PERSON
+DROP
+FOREIGN KEY FK_hfjruvja5peldg0o5hw7g0v51;
 
-    alter table PERSON 
-        drop 
-        foreign key FK_hfjruvja5peldg0o5hw7g0v51;
+ALTER TABLE PERSON_TO_SCAN
+DROP
+FOREIGN KEY FK_fb6h2mj5tgng0lfw4qjisat0f;
 
-    alter table ROLE_TO_PERMISSION 
-        drop 
-        foreign key FK_rnherxb8242khbxdi27y022bb;
+ALTER TABLE PERSON_TO_SCAN
+DROP
+FOREIGN KEY FK_1vqhihu34kpwlo0ppe82ja3on;
 
-    alter table ROLE_TO_PERMISSION 
-        drop 
-        foreign key FK_lwwdu62jxvubui4annsb8uda6;
+ALTER TABLE ROLE_TO_PERMISSION
+DROP
+FOREIGN KEY FK_rnherxb8242khbxdi27y022bb;
 
-    alter table SCANNER_TASK 
-        drop 
-        foreign key FK_sb7ekumnbj0ee1wkkkaokuynp;
+ALTER TABLE ROLE_TO_PERMISSION
+DROP
+FOREIGN KEY FK_lwwdu62jxvubui4annsb8uda6;
 
-    alter table USER_TO_ROLES 
-        drop 
-        foreign key FK_ln9ev0ylplcc4mqjadqr0keoy;
+ALTER TABLE SCANNER_TASK
+DROP
+FOREIGN KEY FK_sb7ekumnbj0ee1wkkkaokuynp;
 
-    alter table USER_TO_ROLES 
-        drop 
-        foreign key FK_28ugs9imwewn8426ppkiq7amu;
+ALTER TABLE USER_TO_ROLES
+DROP
+FOREIGN KEY FK_ln9ev0ylplcc4mqjadqr0keoy;
 
-    drop table if exists PERSON;
+ALTER TABLE USER_TO_ROLES
+DROP
+FOREIGN KEY FK_28ugs9imwewn8426ppkiq7amu;
 
-    drop table if exists ROLE_TO_PERMISSION;
+DROP TABLE IF EXISTS PERSON;
 
-    drop table if exists SCANNER_TASK;
+DROP TABLE IF EXISTS PERSON_TO_SCAN;
 
-    drop table if exists SEC_PERMISSION;
+DROP TABLE IF EXISTS ROLE_TO_PERMISSION;
 
-    drop table if exists SEC_ROLE;
+DROP TABLE IF EXISTS SCAN;
 
-    drop table if exists SEC_USER;
+DROP TABLE IF EXISTS SCANNER_TASK;
 
-    drop table if exists USER_TO_ROLES;
+DROP TABLE IF EXISTS SEC_PERMISSION;
 
-    create table PERSON (
-        ID bigint not null auto_increment,
-        CREATE_DATE datetime,
-        CREATED_BY varchar(60),
-        DELETE_DATE datetime,
-        DELETED_BY varchar(60),
-        UPDATE_DATE datetime,
-        UPDATED_BY varchar(60),
-        VERSION integer,
-        FIRSTNAME varchar(255),
-        LASTNAME varchar(255),
-        MIDDLENAME varchar(255),
-        USER_ID bigint,
-        primary key (ID)
-    );
+DROP TABLE IF EXISTS SEC_ROLE;
 
-    create table ROLE_TO_PERMISSION (
-        PERMISSION_ID bigint not null,
-        ROLE_ID bigint not null
-    );
+DROP TABLE IF EXISTS SEC_USER;
 
-    create table SCANNER_TASK (
-        ID bigint not null auto_increment,
-        CREATE_DATE datetime,
-        CREATED_BY varchar(60),
-        DELETE_DATE datetime,
-        DELETED_BY varchar(60),
-        UPDATE_DATE datetime,
-        UPDATED_BY varchar(60),
-        VERSION integer,
-        REASON varchar(255),
-        RESULT integer,
-        PERSON_ID bigint,
-        primary key (ID)
-    );
+DROP TABLE IF EXISTS USER_TO_ROLES;
 
-    create table SEC_PERMISSION (
-        ID bigint not null auto_increment,
-        CREATE_DATE datetime,
-        CREATED_BY varchar(60),
-        DELETE_DATE datetime,
-        DELETED_BY varchar(60),
-        UPDATE_DATE datetime,
-        UPDATED_BY varchar(60),
-        VERSION integer,
-        ACCESS boolean,
-        PERMISSION_OBJECT varchar(255),
-        primary key (ID)
-    );
+CREATE TABLE PERSON (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  FIRSTNAME   VARCHAR(255),
+  LASTNAME    VARCHAR(255),
+  MIDDLENAME  VARCHAR(255),
+  USER_ID     BIGINT,
+  PRIMARY KEY (ID)
+);
 
-    create table SEC_ROLE (
-        ID bigint not null auto_increment,
-        CREATE_DATE datetime,
-        CREATED_BY varchar(60),
-        DELETE_DATE datetime,
-        DELETED_BY varchar(60),
-        UPDATE_DATE datetime,
-        UPDATED_BY varchar(60),
-        VERSION integer,
-        DESCRIPTION longtext,
-        NAME varchar(100),
-        primary key (ID)
-    );
+CREATE TABLE PERSON_TO_SCAN (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  PERSON_ID   BIGINT,
+  SCAN_ID     BIGINT,
+  PRIMARY KEY (ID)
+);
 
-    create table SEC_USER (
-        ID bigint not null auto_increment,
-        CREATE_DATE datetime,
-        CREATED_BY varchar(60),
-        DELETE_DATE datetime,
-        DELETED_BY varchar(60),
-        UPDATE_DATE datetime,
-        UPDATED_BY varchar(60),
-        VERSION integer,
-        PASSWORD varchar(255),
-        USERNAME varchar(255),
-        primary key (ID)
-    );
+CREATE TABLE ROLE_TO_PERMISSION (
+  PERMISSION_ID BIGINT NOT NULL,
+  ROLE_ID       BIGINT NOT NULL
+);
 
-    create table USER_TO_ROLES (
-        USER_ID bigint not null,
-        ROLE_ID bigint not null
-    );
+CREATE TABLE SCAN (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  PRIMARY KEY (ID)
+);
 
-    alter table PERSON 
-        add index FK_hfjruvja5peldg0o5hw7g0v51 (USER_ID), 
-        add constraint FK_hfjruvja5peldg0o5hw7g0v51 
-        foreign key (USER_ID) 
-        references SEC_USER (ID);
+CREATE TABLE SCANNER_TASK (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  REASON      VARCHAR(255),
+  RESULT      INTEGER,
+  PERSON_ID   BIGINT,
+  PRIMARY KEY (ID)
+);
 
-    alter table ROLE_TO_PERMISSION 
-        add index FK_rnherxb8242khbxdi27y022bb (ROLE_ID), 
-        add constraint FK_rnherxb8242khbxdi27y022bb 
-        foreign key (ROLE_ID) 
-        references SEC_ROLE (ID);
+CREATE TABLE SEC_PERMISSION (
+  ID                BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE       DATETIME,
+  CREATED_BY        VARCHAR(60),
+  DELETE_DATE       DATETIME,
+  DELETED_BY        VARCHAR(60),
+  UPDATE_DATE       DATETIME,
+  UPDATED_BY        VARCHAR(60),
+  VERSION           INTEGER,
+  ACCESS            BOOLEAN,
+  PERMISSION_OBJECT VARCHAR(255),
+  PRIMARY KEY (ID)
+);
 
-    alter table ROLE_TO_PERMISSION 
-        add index FK_lwwdu62jxvubui4annsb8uda6 (PERMISSION_ID), 
-        add constraint FK_lwwdu62jxvubui4annsb8uda6 
-        foreign key (PERMISSION_ID) 
-        references SEC_PERMISSION (ID);
+CREATE TABLE SEC_ROLE (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  DESCRIPTION LONGTEXT,
+  NAME        VARCHAR(100),
+  PRIMARY KEY (ID)
+);
 
-    alter table SCANNER_TASK 
-        add index FK_sb7ekumnbj0ee1wkkkaokuynp (PERSON_ID), 
-        add constraint FK_sb7ekumnbj0ee1wkkkaokuynp 
-        foreign key (PERSON_ID) 
-        references PERSON (ID);
+CREATE TABLE SEC_USER (
+  ID          BIGINT NOT NULL AUTO_INCREMENT,
+  CREATE_DATE DATETIME,
+  CREATED_BY  VARCHAR(60),
+  DELETE_DATE DATETIME,
+  DELETED_BY  VARCHAR(60),
+  UPDATE_DATE DATETIME,
+  UPDATED_BY  VARCHAR(60),
+  VERSION     INTEGER,
+  PASSWORD    VARCHAR(255),
+  USERNAME    VARCHAR(255),
+  PRIMARY KEY (ID)
+);
 
-    alter table SEC_USER 
-        add constraint UK_46psvtdbgrirs6s7ib5d3hs49 unique (USERNAME);
+CREATE TABLE USER_TO_ROLES (
+  USER_ID BIGINT NOT NULL,
+  ROLE_ID BIGINT NOT NULL
+);
 
-    alter table USER_TO_ROLES 
-        add index FK_ln9ev0ylplcc4mqjadqr0keoy (ROLE_ID), 
-        add constraint FK_ln9ev0ylplcc4mqjadqr0keoy 
-        foreign key (ROLE_ID) 
-        references SEC_ROLE (ID);
+ALTER TABLE PERSON
+ADD INDEX FK_hfjruvja5peldg0o5hw7g0v51 (USER_ID),
+ADD CONSTRAINT FK_hfjruvja5peldg0o5hw7g0v51
+FOREIGN KEY (USER_ID)
+REFERENCES SEC_USER (ID);
 
-    alter table USER_TO_ROLES 
-        add index FK_28ugs9imwewn8426ppkiq7amu (USER_ID), 
-        add constraint FK_28ugs9imwewn8426ppkiq7amu 
-        foreign key (USER_ID) 
-        references SEC_USER (ID);
+ALTER TABLE PERSON_TO_SCAN
+ADD INDEX FK_fb6h2mj5tgng0lfw4qjisat0f (PERSON_ID),
+ADD CONSTRAINT FK_fb6h2mj5tgng0lfw4qjisat0f
+FOREIGN KEY (PERSON_ID)
+REFERENCES PERSON (ID);
+
+ALTER TABLE PERSON_TO_SCAN
+ADD INDEX FK_1vqhihu34kpwlo0ppe82ja3on (SCAN_ID),
+ADD CONSTRAINT FK_1vqhihu34kpwlo0ppe82ja3on
+FOREIGN KEY (SCAN_ID)
+REFERENCES SCAN (ID);
+
+ALTER TABLE ROLE_TO_PERMISSION
+ADD INDEX FK_rnherxb8242khbxdi27y022bb (ROLE_ID),
+ADD CONSTRAINT FK_rnherxb8242khbxdi27y022bb
+FOREIGN KEY (ROLE_ID)
+REFERENCES SEC_ROLE (ID);
+
+ALTER TABLE ROLE_TO_PERMISSION
+ADD INDEX FK_lwwdu62jxvubui4annsb8uda6 (PERMISSION_ID),
+ADD CONSTRAINT FK_lwwdu62jxvubui4annsb8uda6
+FOREIGN KEY (PERMISSION_ID)
+REFERENCES SEC_PERMISSION (ID);
+
+ALTER TABLE SCANNER_TASK
+ADD INDEX FK_sb7ekumnbj0ee1wkkkaokuynp (PERSON_ID),
+ADD CONSTRAINT FK_sb7ekumnbj0ee1wkkkaokuynp
+FOREIGN KEY (PERSON_ID)
+REFERENCES PERSON (ID);
+
+ALTER TABLE SEC_USER
+ADD CONSTRAINT UK_46psvtdbgrirs6s7ib5d3hs49 UNIQUE (USERNAME);
+
+ALTER TABLE USER_TO_ROLES
+ADD INDEX FK_ln9ev0ylplcc4mqjadqr0keoy (ROLE_ID),
+ADD CONSTRAINT FK_ln9ev0ylplcc4mqjadqr0keoy
+FOREIGN KEY (ROLE_ID)
+REFERENCES SEC_ROLE (ID);
+
+ALTER TABLE USER_TO_ROLES
+ADD INDEX FK_28ugs9imwewn8426ppkiq7amu (USER_ID),
+ADD CONSTRAINT FK_28ugs9imwewn8426ppkiq7amu
+FOREIGN KEY (USER_ID)
+REFERENCES SEC_USER (ID);

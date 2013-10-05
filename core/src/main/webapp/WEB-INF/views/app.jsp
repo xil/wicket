@@ -43,7 +43,7 @@
         require(["dojo/parser", "app/app", "dojo/domReady!"], function (parser, App) {
             parser.parse();
             var application = new App();
-//
+            application.init();
         });
     </script>
 </head>

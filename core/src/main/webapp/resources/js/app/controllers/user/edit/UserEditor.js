@@ -3,13 +3,19 @@
  * Date: 06.07.13 21:06
  */
 define([
-    "dojo/_base/declare", "dojo/_base/lang", 'dojo/when',
-
+    "./UserEditorView",
     "controllers/common/AbstractController",
 
-    "./UserEditorView", "dojo/store/JsonRest", "dojo/data/ItemFileReadStore"
-    , "dojox/mvc/EditStoreRefController", "dojox/mvc/getPlainValue", "dojox/mvc/getStateful"
-], function (declare, lang, when, AbstractController, UserEditorView, JsonRest, ItemFileReadStore, EditStoreRefController, getPlainValue, getStateful) {
+    "dojo/_base/declare",
+    "dojo/_base/lang",
+    "dojo/data/ItemFileReadStore",
+    "dojo/store/JsonRest",
+    "dojo/when",
+
+    "dojox/mvc/EditStoreRefController",
+    "dojox/mvc/getPlainValue",
+    "dojox/mvc/getStateful"
+], function (UserEditorView, AbstractController, declare, lang, ItemFileReadStore, JsonRest, when, EditStoreRefController, getPlainValue, getStateful) {
     return declare("controllers.user.UserBrowser", [AbstractController, EditStoreRefController], {
 
         _viewTemplateString: "ws/rest/user/editTemplate",
@@ -39,12 +45,25 @@ define([
             view.show();
 
             var self = this;
-            view.on("commitAction", function(params) {
-                self.emit("commitAction", {});
+            view.on("commitAction", function (params) {
+                self.commit(function () {
+                    self.view.hide();
+                    self.emit("commitAction", {});
+                }, function () {
+//                    show err dialog or others
+                });
             });
-            view.on("closeAction", function(params) {
+            view.on("closeAction", function (params) {
+                self.view.hide();
                 self.emit("closeAction", {});
             });
+        },
+        commit: function (callback, errback) {
+//            bcz data is plain -> remove actions with arrays. Data can only saved -> remove deleting actions
+            var data = getPlainValue(this.get(this._refEditModelProp), this.getPlainValueOptions);
+            var resultDeferred = this.store.put(data);
+            resultDeferred.addCallback(callback);
+            resultDeferred.addErrback(errback);
         },
         _addListeners: function () {
 //            this.mainPane.on("clickMenuBarItem_logout", function () {

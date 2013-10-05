@@ -3,19 +3,25 @@
  * Date: 06.07.13 21:06
  */
 define([
-    "dojo/_base/declare", "dojo/_base/lang",
-
     "controllers/common/AbstractController",
+    "controllers/LoginController",
+    "controllers/user/edit/UserEditor",
 
-    "views/user/UserBrowserView", "dojo/store/JsonRest", "dojo/data/ObjectStore"    ,
-    "controllers/user/edit/UserEditor"
-], function (declare, lang, AbstractController, UserBrowserView, JsonRest, ObjectStore, UserEditor) {
+    "dojo/_base/declare",
+    "dojo/_base/lang",
+    "dojo/data/ObjectStore",
+    "dojo/store/JsonRest",
+
+    "controllers/user/browse/UserBrowserView"
+
+], function (AbstractController, LoginController, UserEditor, declare, lang, ObjectStore, JsonRest, UserBrowserView) {
     return declare("controllers.user.UserBrowser", [AbstractController], {
 
         _viewTemplateString: "ws/rest/user/template",
         currentTab: null,
         userStore: null,
         view: null,
+        dsContext: null,
 
         init: function () {
 //            TODO rework it!
@@ -23,6 +29,11 @@ define([
             this.view.placeAt(this.currentTab);
             this.view.startup();
             this._addListeners();
+        },
+        _initDsContext: function () {
+            this.dsContext = {
+
+            }
         },
         _addListeners: function () {
             var self = this;
@@ -35,12 +46,6 @@ define([
                     this._openEditor(this.view.getSelectedId(selectedId));
                 }
             }));
-//            this._addListener("remove", function(params) {
-//                var selectedId = this.view.selectedRowId;
-//                if (!selectedId) {
-//                  self.userStore.deleteItem();
-//                }
-//            });
             this.view.on("remove", lang.hitch(this, function (params) {
                 var selectedId = this.view.selectedRowId;
                 if (undefined != selectedId) {
@@ -48,15 +53,11 @@ define([
                     self.userStore.deleteItem(this.view.getSelectedItem());
                     self.userStore.save();
                 }
-//                TODO add refreshing
             }));
             this.view.on("refresh", lang.hitch(this, function (params) {
                 this._refreshStore();
+//                self.userStore.fetch();
             }));
-        },
-        _addListener: function (eventName, func) {
-            this.view.on(eventName, lang.hitch(this, func(params)));
-
         },
         _openEditor: function (itemId) {
             var editor = new UserEditor({itemId: itemId});
@@ -64,6 +65,8 @@ define([
             var self = this;
             editor.on("commitAction", function (params) {
                 self._refreshStore();
+                self._refreshStore();//dirty hack for clean cache. TODO: rework it!
+
             });
         },
         _getViewParams: function () {
@@ -90,13 +93,13 @@ define([
 //            url: "ws/rest/user/list"
 //                target: "ws/rest/user/list", idAttribute: "id"
 //            };
-            var self = this;
-            var restUserStore = this.restUserStore;
-            var viewStore = this.userStore = new ObjectStore({objectStore: restUserStore});
-            var refresh = function () {
-                self._refreshStore();
-            }
-//            dojo.connect(viewStore, "onDelete", refresh);
+//            var self = this;
+//            var restUserStore = this.restUserStore;
+            var viewStore = this.userStore;
+//            = new ObjectStore({objectStore: restUserStore});
+//            viewStore.onDelete = function () {
+//                self._refreshStore();
+//            }
             this.view.usersGrid.setStore(viewStore, "/list");
         }
 

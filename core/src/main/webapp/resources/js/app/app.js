@@ -8,13 +8,15 @@
 
 define([
 //    Base modules
-    "dojo/_base/declare", "dojo/_base/lang",
+    "dojo/_base/declare",
+    "dojo/_base/lang",
+    "require",
 //    login and user page controllers
     "controllers/main/MainController"
     //,
 //    ready!
 //    "dojo/ready"
-], function (declare, lang, MainController) {
+], function (declare, lang, require, MainController) {
     return declare("app", null, {
 //        loginController: null,
 //        userPageController: null,
@@ -23,14 +25,23 @@ define([
         applicationContext: null,
 
         constructor: function () {
-            this.mainController = new MainController({app: this});
-            this.mainController.init();
+
         },
         init: function () {
+            this.mainController = new MainController({app: this});
+            this.mainController.init();
 
+            this.initErrorHandler();
         },
-        initErrorHandler: function() {
 
+        handleError: function (error) {
+            console.log(error.src, error.id);
+        },
+
+        initErrorHandler: function () {
+            require.on("error", function (error) {
+                console.log(error.src, error.id);
+            });
         }
     });
 })

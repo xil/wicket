@@ -4,6 +4,7 @@ import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.security.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PERSON")
@@ -22,6 +23,9 @@ public class Person extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private List<PersonToScan> scans;
 
     public String getFirstname() {
         return firstname;
@@ -53,5 +57,13 @@ public class Person extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<PersonToScan> getScans() {
+        return scans;
+    }
+
+    public void setScans(List<PersonToScan> scans) {
+        this.scans = scans;
     }
 }

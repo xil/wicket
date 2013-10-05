@@ -4,6 +4,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.PersonToScan;
+import ru.biosecure.wicket.global.core.entities.Scan;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
 import ru.biosecure.wicket.global.core.entities.security.Permission;
 import ru.biosecure.wicket.global.core.entities.security.Role;
@@ -24,7 +26,9 @@ public class DDLGenerator {
                 Role.class,
                 Person.class,
                 Permission.class,
-                User.class
+                User.class,
+                PersonToScan.class,
+                Scan.class
         );
     }
 
