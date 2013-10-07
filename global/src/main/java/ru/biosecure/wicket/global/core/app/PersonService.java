@@ -11,4 +11,6 @@ public interface PersonService {
     public List<Person> listPerson();
 
     public void removePerson(long id);
+
+    List<Person> findPersonByScanId(String[] splitIds);
 }

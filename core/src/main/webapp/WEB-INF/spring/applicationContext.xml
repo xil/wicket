@@ -21,6 +21,16 @@
     <context:component-scan base-package="ru.biosecure.wicket.core"/>
     <context:component-scan base-package="ru.biosecure.wicket.global"/>
 
+    <bean id="signal_mbean" class="ru.biosecure.wicket.core.scanner.DaemonMBeanImpl"/>
+
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry key="bean:service=SignalMBean" value-ref="signal_mbean"/>
+            </map>
+        </property>
+    </bean>
+
     <!-- Configures the annotation-driven Spring MVC Controller programming model -->
     <mvc:annotation-driven/>
 

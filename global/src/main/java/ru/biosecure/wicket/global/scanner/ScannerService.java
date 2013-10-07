@@ -11,5 +11,16 @@ import ru.biosecure.wicket.global.core.enums.ScanTaskType;
  * To change this template use File | Settings | File Templates.
  */
 public interface ScannerService {
+    @Deprecated
     ScannerTask executeTask(ScanTaskType taskType);
+
+    void scan();
+
+    void startDaemon();
+
+    void stopDaemon();
+
+    void enroll();
+
+    void enrollStop();
 }

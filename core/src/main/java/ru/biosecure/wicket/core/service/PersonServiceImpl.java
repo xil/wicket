@@ -9,6 +9,7 @@ import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.core.repo.PersonRepository;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,5 +36,10 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     public void removePerson(long id) {
         personDAO.removePerson(id);
+    }
+
+    @Override
+    public List<Person> findPersonByScanId(String[] splitIds) {
+        return new ArrayList<Person>();
     }
 }
