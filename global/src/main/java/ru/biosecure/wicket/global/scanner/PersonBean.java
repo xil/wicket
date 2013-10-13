@@ -5,15 +5,13 @@ import ru.biosecure.wicket.global.core.entities.Person;
 /**
  * Created with IntelliJ IDEA.
  * User: Marina
- * Date: 01.10.13
- * Time: 23:47
+ * Date: 14.10.13
+ * Time: 0:40
  * To change this template use File | Settings | File Templates.
  */
-public interface DaemonMBean {
+public interface PersonBean {
 
-    public static final String NAME = "daemon-mbean";
+    void setPerson(Person person);
 
-    void notifyId(Object id);
-
-    void failed(Object id);
+    Person getPerson();
 }

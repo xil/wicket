@@ -12,5 +12,5 @@ public interface PersonService {
 
     public void removePerson(long id);
 
-    List<Person> findPersonByScanId(String[] splitIds);
+    Iterable<Person> findPersonByScanId(List<Long> ids);
 }

@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> findPersonByScanId(String[] splitIds) {
-        return new ArrayList<Person>();
+    public List<Person> findPersonByScanId(List<Long> ids) {
+        return (List<Person>) personRepository.findAll(ids);
     }
 }

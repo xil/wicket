@@ -1,5 +1,6 @@
 package ru.biosecure.wicket.global.scanner;
 
+import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
 import ru.biosecure.wicket.global.core.enums.ScanTaskType;
 
@@ -15,6 +16,10 @@ public interface ScannerService {
     ScannerTask executeTask(ScanTaskType taskType);
 
     void scan();
+
+    void scan(Person person);
+
+    String getCurrentState();
 
     void startDaemon();
 

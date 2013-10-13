@@ -1,11 +1,14 @@
 package ru.biosecure.wicket.core.scanner;
 
 import org.springframework.stereotype.Service;
+import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
 import ru.biosecure.wicket.global.core.enums.ScanTaskExecutionResult;
 import ru.biosecure.wicket.global.core.enums.ScanTaskType;
+import ru.biosecure.wicket.global.scanner.PersonBean;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
 /**
@@ -24,6 +27,9 @@ public class ScannerServiceImpl implements ScannerService {
     private static final String[] STOP = {"/opt/sh", "-c"};
     private static final String[] ENROLL = {PATH_DAEMON, "-e"};
     private static final String[] ENROLL_STOP = {PATH_DAEMON, "-es"};
+
+    @Inject
+    private PersonBean personBean;
 
     @Override
     public ScannerTask executeTask(ScanTaskType taskType) {
@@ -86,5 +92,16 @@ public class ScannerServiceImpl implements ScannerService {
 
     public void scan() {
         enroll();
+    }
+
+    @Override
+    public void scan(Person person) {
+        enroll();
+        personBean.setPerson(person);
+    }
+
+    @Override
+    public String getCurrentState() {
+        return null;
     }
 }
