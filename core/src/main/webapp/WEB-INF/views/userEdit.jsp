@@ -33,6 +33,14 @@
                                    data-dojo-props="value: at('rel:', 'lastname'), required: true, maxLength: 64, trim: true"/>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Scanning</td>
+                        <td>
+                            <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="scanningButton">
+                                Go!
+                            </button>
+                        </td>
+                     </tr>
                 </table>
             </div>
         </form>
@@ -46,5 +54,8 @@
         <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="cancelButton">
             Cancel
         </button>
+                <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="applyButton">
+                    Apply
+                </button>
     </div>
 </div>

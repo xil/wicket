@@ -13,6 +13,7 @@
     <modules>
         <module>global</module>
         <module>core</module>
+        <module>devices</module>
         <!--<module>web</module>-->
     </modules>
 

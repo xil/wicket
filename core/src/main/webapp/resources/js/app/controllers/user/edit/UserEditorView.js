@@ -38,6 +38,12 @@ define([
             commitButton.set("label", "Commit");
             var cancelButton = this.content.cancelButton;
             this.connect(cancelButton, "onClick", "cancel");
+            var applyButton = this.content.applyButton;
+            this.connect(applyButton, "onClick", "apply");
+
+            var scanningButton = this.content.scanningButton;
+            this.connect(scanningButton, "onClick", "scanning");
+            scanningButton.set("disabled", !this.contentParams.scanningEnabled);
         },
         commit: function () {
 //            TODO check validation
@@ -47,6 +53,19 @@ define([
         },
         cancel: function () {
             this.emit("closeAction", {});
+        },
+        apply: function() {
+        //            TODO check validation
+            if (this.content.form.validate()) {
+                this.emit("applyAction", {});
+            }
+        },
+        scanning: function() {
+            this.emit("scanningAction", {});
+        },
+        enableScanning: function() {
+            this.contentParams.scanningEnabled = true;
+            this.content.scanningButton.set("disabled", !this.contentParams.scanningEnabled);
         }
     });
 });

@@ -57,6 +57,27 @@ define([
                 self.view.hide();
                 self.emit("closeAction", {});
             });
+            view.on("applyAction", function (params) {
+                self.commit(function (params) {
+                    self.itemId = params.id;
+                    self.getStore(self.itemId)
+                    self.view.enableScanning();
+                }, function () {
+                //show err dialog or others
+                });
+            });
+            view.on("scanningAction", function (params) {
+                var xhrArgs = {
+                      url: "ws/rest/user/scanning/" + self.itemId,
+                      postData: "SCANNING!!!",
+                      handleAs: "text",
+                      load: function(data){
+                      },
+                      error: function(error){
+                      }
+                }
+                var deferred = dojo.xhrPost(xhrArgs);
+            });
         },
         commit: function (callback, errback) {
 //            bcz data is plain -> remove actions with arrays. Data can only saved -> remove deleting actions
@@ -84,7 +105,8 @@ define([
                     templateString: self._getTemplateString(),
                     viewStore: viewStore,
                     ctrl: self,
-                    style: {}
+                    style: {},
+                    scanningEnabled: !!this.itemId
                 }
             };
             return params;

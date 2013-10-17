@@ -7,6 +7,7 @@ import ru.biosecure.wicket.core.repo.PersonRepository;
 import ru.biosecure.wicket.core.repo.UserRepository;
 import ru.biosecure.wicket.core.web.SimpleController;
 import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -27,6 +28,8 @@ public class UserController implements SimpleController {
     private UserRepository userRepository;
     @Inject
     private PersonRepository personRepository;
+    @Inject
+    private ScannerService scannerService;
 
     @RequestMapping("/list")
     @ResponseBody
@@ -56,21 +59,35 @@ public class UserController implements SimpleController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     public Person savePerson(@RequestBody Person item) {
         if (item != null && personRepository.findOne(item.getId()) != null) {
-            personRepository.save(item);
-            return personRepository.findOne(item.getId());
+            return personRepository.save(item);
         }
         return null;
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public void addPerson(@RequestBody Person item) {
-        personRepository.save(item);
+    public Person addPerson(@RequestBody Person item) {
+        return personRepository.saveAndFlush(item);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deletePerson(@PathVariable String userId) {
         personRepository.delete(Long.parseLong(userId));
+    }
+
+    @RequestMapping(value = "/scanning/{userId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String scanningPerson(@PathVariable String userId) {
+        logger.warn("Scanning user with id '" + userId + "'");
+        Person person = personRepository.findOne(Long.parseLong(userId));
+        if (person != null) {
+            try {
+                scannerService.scan(person);
+            } catch (Exception e) {
+                logger.error("Error", e);
+            }
+        }
+        return "scanning";
     }
 }
