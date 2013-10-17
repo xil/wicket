@@ -17,6 +17,7 @@ import ru.biosecure.wicket.global.scanner.PersonBean;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class DaemonMBeanImpl implements DaemonMBean {
     @Override
     public void notifyId(Object ids) {
         if (ids == null) return;
-        List<Long> scanIdList = convertToLongList(ids.toString());
+        List<Long> scanIdList = convertToLongList((String[]) ids);
         List<Person> persons = getPersonById(scanIdList);
         List<BaseEntity> commitEntities = new ArrayList<BaseEntity>();
         if (CollectionUtils.isEmpty(persons)) {
@@ -74,10 +75,9 @@ public class DaemonMBeanImpl implements DaemonMBean {
         commit(commitEntities);
     }
 
-    private List<Long> convertToLongList(String idStr) {
-        String[] splitId = idStr.split(",");
+    private List<Long> convertToLongList(String[] idStr) {
         List<Long> idList = new ArrayList<Long>();
-        for (String id : splitId) {
+        for (String id : idStr) {
             if (id == null || id.isEmpty()) continue;
             idList.add(Long.valueOf(id));
         }

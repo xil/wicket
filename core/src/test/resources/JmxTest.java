@@ -16,30 +16,36 @@ import java.util.Set;
  */
 public class JmxTest {
 
+    public static final int PORT = 7777;
+    public static final String HOST = "localhost";
+    public static final String MBEAN_MANE = "bean:service=SignalMBean";
+    public static final String TYPE = "java.lang.Object";
+    public static final String OPERATION_NAME = "notifyId";
+
     public static void main(String[] args) {
-        String host = "localhost";  // or some A.B.C.D
-        int port = 7777;
-        String url = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
+        if (args == null || args.length == 0) return;
+        String url = "service:jmx:rmi:///jndi/rmi://" + HOST + ":" + PORT + "/jmxrmi";
         try {
             JMXServiceURL serviceUrl = new JMXServiceURL(url);
             JMXConnector jmxConnector = JMXConnectorFactory.connect(serviceUrl, null);
+            if (jmxConnector == null) return;
             MBeanServerConnection mbeanConn = jmxConnector.getMBeanServerConnection();
-            Set<ObjectName> objectNames = mbeanConn.queryNames(new ObjectName("bean:service=SignalMBean"), null);
-            Object[] argArray = new Object[]{"33,99"};
-            String[] signature = new String[]{"java.lang.Object"};
+            if (mbeanConn == null) return;
+            Set<ObjectName> objectNames = mbeanConn.queryNames(new ObjectName(MBEAN_MANE), null);
+            if (objectNames == null || objectNames.isEmpty()) return;
+            Object[] argArray = new Object[]{args};
+            String[] signature = new String[]{TYPE};
             for (ObjectName bean : objectNames) {
-                mbeanConn.invoke(bean, "notifyId", argArray, signature);
+                mbeanConn.invoke(bean, OPERATION_NAME, argArray, signature);
                 break;
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (MalformedObjectNameException e) {
+        } catch (MalformedObjectNameException e) {
             e.printStackTrace();
-        }
-        catch (ReflectionException e) {
+        } catch (ReflectionException e) {
             e.printStackTrace();
         } catch (MBeanException e) {
             e.printStackTrace();
