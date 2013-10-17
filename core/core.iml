@@ -24,9 +24,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping>
-          <factory-entry name="hibernatePersistenceUnit" value="jpaDataSource" />
-        </datasource-mapping>
+        <datasource-mapping />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/data/persistence.xml" />
       </configuration>
     </facet>
@@ -34,8 +32,8 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/servletContext.xml</file>
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/security.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/security.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/data/data.xml</file>
         </fileset>
       </configuration>
@@ -62,6 +60,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.1.2.RELEASE" level="project" />
+    <orderEntry type="module" module-name="devices" />
+    <orderEntry type="library" name="Maven: org.zeromq:jzmq:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:3.1.2.RELEASE" level="project" />
