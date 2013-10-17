@@ -21,21 +21,16 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>-->
-        <!--<groupId>${project.groupId}</groupId>-->
-        <!--<artifactId>global</artifactId>-->
-        <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>${project.groupId}</groupId>-->
-        <!--<artifactId>core</artifactId>-->
-        <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.dojotoolkit</groupId>-->
-        <!--<artifactId>dojo</artifactId>-->
-        <!--<version>${dojo.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>global</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <profiles>
         <!--Development profile. It is active by default-->
@@ -88,18 +83,18 @@
         <plugins>
 
             <!--<plugin>-->
-                <!--<groupId>org.apache.tomcat.maven</groupId>-->
-                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-                <!--<version>2.1</version>-->
-                <!--<configuration>-->
-                    <!--<port>8080</port>-->
-                    <!--<path>/</path>-->
-                    <!--&lt;!&ndash;TODO&ndash;&gt;-->
-                    <!--&lt;!&ndash;<contextFile></contextFile>&ndash;&gt;-->
-                    <!--<systemProperties>-->
-                        <!--<appserver.base></appserver.base>-->
-                    <!--</systemProperties>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.tomcat.maven</groupId>-->
+            <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+            <!--<version>2.1</version>-->
+            <!--<configuration>-->
+            <!--<port>8080</port>-->
+            <!--<path>/</path>-->
+            <!--&lt;!&ndash;TODO&ndash;&gt;-->
+            <!--&lt;!&ndash;<contextFile></contextFile>&ndash;&gt;-->
+            <!--<systemProperties>-->
+            <!--<appserver.base></appserver.base>-->
+            <!--</systemProperties>-->
+            <!--</configuration>-->
             <!--</plugin>-->
             <!--TODO-->
             <!--<plugin>-->
