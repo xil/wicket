@@ -31,7 +31,69 @@
             <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <!--TODO add 3.0 servlet version-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
+    <!--<profiles>-->
+    <!--&lt;!&ndash;Development profile. It is active by default&ndash;&gt;-->
+    <!--<profile>-->
+    <!--<id>development</id>-->
+    <!--<activation>-->
+    <!--<activeByDefault>true</activeByDefault>-->
+    <!--<property>-->
+    <!--<name>dev</name>-->
+    <!--</property>-->
+    <!--</activation>-->
+    <!--<properties>-->
+    <!--<tomcat.version>7.0.42</tomcat.version>-->
+    <!--</properties>-->
+    <!--<build>-->
+    <!--<plugins>-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.maven.plugins</groupId>-->
+    <!--<artifactId>maven-war-plugin</artifactId>-->
+    <!--<configuration>-->
+    <!--<warName>wicket</warName>-->
+    <!--<warSourceExcludes>resources/**</warSourceExcludes>-->
+    <!--</configuration>-->
+    <!--</plugin>-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.tomcat.maven</groupId>-->
+    <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+    <!--<version>2.1</version>-->
+    <!--<configuration>-->
+    <!--<port>8080</port>-->
+    <!--<path>/</path>-->
+    <!--<staticContextDocbase>resources/</staticContextDocbase>-->
+    <!--<staticContextPath>/resources</staticContextPath>-->
+    <!--</configuration>-->
+    <!--</plugin>-->
+    <!--</plugins>-->
+    <!--</build>-->
+    <!--</profile>-->
+    <!--<profile>-->
+    <!--<id>production</id>-->
+    <!--<activation>-->
+    <!--<property>-->
+    <!--<name>prod</name>-->
+    <!--</property>-->
+    <!--</activation>-->
+    <!--</profile>-->
+    <!--</profiles>-->
+
     <profiles>
         <!--Development profile. It is active by default-->
         <profile>
@@ -48,20 +110,13 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <warName>wicket</warName>
-                            <warSourceExcludes>resources/**</warSourceExcludes>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
                         <version>2.1</version>
                         <configuration>
                             <port>8080</port>
                             <path>/</path>
+                            <tomcatLoggingFile>tomcat_server.log</tomcatLoggingFile>
                             <staticContextDocbase>resources/</staticContextDocbase>
                             <staticContextPath>/resources</staticContextPath>
                         </configuration>
@@ -79,81 +134,15 @@
         </profile>
     </profiles>
     <build>
-
         <plugins>
-
-            <!--<plugin>-->
-            <!--<groupId>org.apache.tomcat.maven</groupId>-->
-            <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-            <!--<version>2.1</version>-->
-            <!--<configuration>-->
-            <!--<port>8080</port>-->
-            <!--<path>/</path>-->
-            <!--&lt;!&ndash;TODO&ndash;&gt;-->
-            <!--&lt;!&ndash;<contextFile></contextFile>&ndash;&gt;-->
-            <!--<systemProperties>-->
-            <!--<appserver.base></appserver.base>-->
-            <!--</systemProperties>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-            <!--TODO-->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-dependency-plugin</artifactId>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>unpackDojo</id>-->
-            <!--<phase>generate-sources</phase>-->
-            <!--<goals>-->
-            <!--<goal>unpack</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-            <!--<artifactItems>-->
-            <!--<artifactItem>-->
-            <!--<groupId>org.dojotoolkit</groupId>-->
-            <!--<artifactId>dojo</artifactId>-->
-            <!--<version>${dojo.version}</version>-->
-            <!--<type>zip</type>-->
-            <!--<outputDirectory>-->
-            <!--${dojo.sources.location}-->
-            <!--</outputDirectory>-->
-            <!--</artifactItem>-->
-            <!--</artifactItems>-->
-            <!--</configuration>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
-
-            <!--<plugin>-->
-            <!--<groupId>com.googlecode.maven-download-plugin</groupId>-->
-            <!--<artifactId>maven-download-plugin</artifactId>-->
-            <!--<version>${downloadPlugin.version}</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--&lt;!&ndash; the wget goal actually binds itself to this phase by default &ndash;&gt;-->
-            <!--<phase>generate-sources</phase>-->
-            <!--<goals>-->
-            <!--<goal>wget</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-            <!--<url>http://download.dojotoolkit.org/release-1.9.1/dojo-release-1.9.1-src.zip</url>-->
-            <!--<outputFileName>foo.bar</outputFileName>-->
-            <!--&lt;!&ndash; default target location, just to demonstrate the parameter &ndash;&gt;-->
-            <!--<targetDirectory>${project.build.directory}</targetDirectory>-->
-            <!--</configuration>-->
-            <!--</execution>-->
-            <!--<execution>-->
-            <!--<phase>generate-sources</phase>-->
-            <!--<goals>-->
-            <!--<goal>wget</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-            <!--<url>http://download.dojotoolkit.org/release-1.9.1/dojo-release-1.9.1.zip</url>-->
-            <!--</configuration>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warName>wicket</warName>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>

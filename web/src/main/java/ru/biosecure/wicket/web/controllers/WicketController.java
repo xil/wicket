@@ -13,7 +13,7 @@ import java.io.IOException;
 public class WicketController implements SimpleController {
 
     @Inject
-    WicketService wicketService;
+    private WicketService wicketService;
 
     @Override
     public String getScreenTemplate() {

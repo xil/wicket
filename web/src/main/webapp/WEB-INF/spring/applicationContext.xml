@@ -12,24 +12,8 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-    <context:property-placeholder properties-ref="deployProperties"/>
-
     <!-- Activates various annotations -->
     <context:annotation-config/>
-
-    <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
-    <context:component-scan base-package="ru.biosecure.wicket.core"/>
-    <context:component-scan base-package="ru.biosecure.wicket.global"/>
-
-    <bean id="signal_mbean" class="ru.biosecure.wicket.core.scanner.DaemonMBeanImpl"/>
-
-    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
-        <property name="beans">
-            <map>
-                <entry key="bean:service=SignalMBean" value-ref="signal_mbean"/>
-            </map>
-        </property>
-    </bean>
 
     <!-- Configures the annotation-driven Spring MVC Controller programming model -->
     <mvc:annotation-driven/>
@@ -43,13 +27,6 @@
           p:order="1"
           p:contentType="text/html;charset=UTF-8"/>
 
-    <!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
-    <import resource="data/data.xml"/>
-
     <!--TODO add for normal logging-->
     <!--<import resource="logging/trace-context.xml"/>-->
-
-    <bean id="deployProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
-          p:location="/WEB-INF/app.properties"/>
-
 </beans>

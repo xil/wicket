@@ -1,0 +1,39 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder properties-ref="dataProperties"/>
+
+    <!-- Activates various annotations -->
+    <context:annotation-config/>
+
+    <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
+    <context:component-scan base-package="ru.biosecure.wicket.core"/>
+    <context:component-scan base-package="ru.biosecure.wicket.global"/>
+
+    <bean id="signal_mbean" class="ru.biosecure.wicket.core.scanner.DaemonMBeanImpl"/>
+
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry key="bean:service=SignalMBean" value-ref="signal_mbean"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
+    <import resource="data-context.xml"/>
+
+    <!--TODO add for normal logging-->
+    <!--<import resource="logging/trace-context.xml"/>-->
+
+    <bean id="dataProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+          p:location="classpath:app.properties"/>
+
+</beans>

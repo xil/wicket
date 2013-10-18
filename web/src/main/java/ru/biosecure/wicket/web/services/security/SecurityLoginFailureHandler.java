@@ -22,9 +22,10 @@ public class SecurityLoginFailureHandler extends SimpleUrlAuthenticationFailureH
 
     private final Logger logger = Logger.getLogger(getClass());
 
-//    TODO
+    //    TODO
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
         super.onAuthenticationFailure(request, response, exception);
 
         logger.warn("fdsfsfs");
