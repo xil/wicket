@@ -2,7 +2,7 @@ package ru.biosecure.wicket.global.core.entities.scanner;
 
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
-import ru.biosecure.wicket.global.core.enums.ScanTaskExecutionResult;
+import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 
 import javax.persistence.*;
 
@@ -20,7 +20,7 @@ public class ScannerTask extends BaseEntity {
     private static final long serialVersionUID = -5837363605144242913L;
 
     @Column(name = "RESULT")
-    protected ScanTaskExecutionResult result;
+    protected ScanExecutionResult result;
 
     @Column(name = "REASON")
     protected String reason;
@@ -29,11 +29,11 @@ public class ScannerTask extends BaseEntity {
     @JoinColumn(name = "PERSON_ID")
     protected Person person;
 
-    public ScanTaskExecutionResult getResult() {
+    public ScanExecutionResult getResult() {
         return result;
     }
 
-    public void setResult(ScanTaskExecutionResult result) {
+    public void setResult(ScanExecutionResult result) {
         this.result = result;
     }
 

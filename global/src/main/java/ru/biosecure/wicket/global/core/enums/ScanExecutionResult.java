@@ -7,8 +7,9 @@ package ru.biosecure.wicket.global.core.enums;
  * Time: 23:40
  * To change this template use File | Settings | File Templates.
  */
-public enum ScanTaskExecutionResult {
-    EXECUTING,
-    SUCCESS,
-    FAILED
+public enum ScanExecutionResult {
+    EXECUTING, //in process of scanning
+    SUCCESS, //all right
+    NEED_CORRECTING, //e.g. turn hand right
+    FAILED //e.g. scanner is down
 }

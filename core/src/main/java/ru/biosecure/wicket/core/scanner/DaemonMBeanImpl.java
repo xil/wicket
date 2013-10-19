@@ -1,23 +1,19 @@
 package ru.biosecure.wicket.core.scanner;
 
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import ru.biosecure.wicket.global.core.app.PersonService;
 import ru.biosecure.wicket.global.core.app.ScanService;
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.PersonToScan;
-import ru.biosecure.wicket.global.core.entities.Scan;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
-import ru.biosecure.wicket.global.core.enums.ScanTaskExecutionResult;
+import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 import ru.biosecure.wicket.global.scanner.DaemonMBean;
 import ru.biosecure.wicket.global.scanner.DataService;
 import ru.biosecure.wicket.global.scanner.PersonBean;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +44,7 @@ public class DaemonMBeanImpl implements DaemonMBean {
     @Override
     public void failed(Object id) {
         Person firstEmployee = personBean.getPerson();
-        ScannerTask scannerTask = createScannerTask(firstEmployee, ScanTaskExecutionResult.FAILED);
+        ScannerTask scannerTask = createScannerTask(firstEmployee, ScanExecutionResult.FAILED);
         dataService.commit(scannerTask);
     }
 
@@ -69,7 +65,7 @@ public class DaemonMBeanImpl implements DaemonMBean {
             }
         } else {
             Person firstEmployee = persons.iterator().next();
-            ScannerTask scannerTask = createScannerTask(firstEmployee, ScanTaskExecutionResult.SUCCESS);
+            ScannerTask scannerTask = createScannerTask(firstEmployee, ScanExecutionResult.SUCCESS);
             commitEntities.add(scannerTask);
         }
         commit(commitEntities);
@@ -93,7 +89,7 @@ public class DaemonMBeanImpl implements DaemonMBean {
         commitEntities.add(scanLink);
     }
 
-    private ScannerTask createScannerTask(Person firstEmployee, ScanTaskExecutionResult type) {
+    private ScannerTask createScannerTask(Person firstEmployee, ScanExecutionResult type) {
         ScannerTask scannerTask = new ScannerTask();
         scannerTask.setCreatedBy(ADMIN);
         scannerTask.setCreateDate(new Date());

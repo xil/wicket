@@ -2,8 +2,9 @@ package ru.biosecure.wicket.core.scanner;
 
 import org.springframework.stereotype.Service;
 import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
-import ru.biosecure.wicket.global.core.enums.ScanTaskExecutionResult;
+import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 import ru.biosecure.wicket.global.core.enums.ScanTaskType;
 import ru.biosecure.wicket.global.scanner.PersonBean;
 import ru.biosecure.wicket.global.scanner.ScannerService;
@@ -80,7 +81,7 @@ public class ScannerServiceImpl implements ScannerService {
 
     private ScannerTask scanStart() {
         ScannerTask scannerTask = new ScannerTask();
-        scannerTask.setResult(ScanTaskExecutionResult.EXECUTING);
+        scannerTask.setResult(ScanExecutionResult.EXECUTING);
         return scannerTask;
     }
 
@@ -102,6 +103,12 @@ public class ScannerServiceImpl implements ScannerService {
 
     @Override
     public String getCurrentState() {
+        return null;
+    }
+
+    @Override
+    public ScanResult getResult(Person person) {
+//        TODO
         return null;
     }
 }
