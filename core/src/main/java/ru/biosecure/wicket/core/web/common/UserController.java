@@ -7,10 +7,14 @@ import ru.biosecure.wicket.core.repo.PersonRepository;
 import ru.biosecure.wicket.core.repo.UserRepository;
 import ru.biosecure.wicket.core.web.SimpleController;
 import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,8 +37,20 @@ public class UserController implements SimpleController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<Person> getAll() {
-        return personRepository.findAll();
+    public List<Map<String, String>> getAll() {
+        List<Person> persons = personRepository.findAll();
+        if (persons != null) {
+            List<Map<String, String>> resList = new ArrayList<Map<String, String>>();
+            for (Person p : persons) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("firstname", p.getFirstname());
+                map.put("lastname", p.getLastname());
+                map.put("middlename", p.getMiddlename());
+                resList.add(map);
+            }
+            return resList;
+        }
+        return null;
     }
 
     @Override
@@ -89,5 +105,20 @@ public class UserController implements SimpleController {
             }
         }
         return "scanning";
+    }
+
+    @RequestMapping(value = "/scanningState/{userId}", method = RequestMethod.POST)
+    @ResponseBody
+    public ScanResult getStateOfScanning(@PathVariable String userId) {
+        logger.warn("Get status of scanner for user with id '" + userId + "'");
+        Person person = personRepository.findOne(Long.parseLong(userId));
+        if (person != null) {
+            try {
+                return scannerService.getResult(person);
+            } catch (Exception e) {
+                logger.error("Error", e);
+            }
+        }
+        return null;
     }
 }

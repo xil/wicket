@@ -3,6 +3,8 @@
  * Date: 06.07.13 21:06
  */
 define([
+    'dojo/Evented',
+    'dojo/dom',
     "./UserEditorView",
     "controllers/common/AbstractController",
 
@@ -15,7 +17,29 @@ define([
     "dojox/mvc/EditStoreRefController",
     "dojox/mvc/getPlainValue",
     "dojox/mvc/getStateful"
-], function (UserEditorView, AbstractController, declare, lang, ItemFileReadStore, JsonRest, when, EditStoreRefController, getPlainValue, getStateful) {
+], function (Evented, dom, UserEditorView, AbstractController, declare, lang, ItemFileReadStore, JsonRest, when, EditStoreRefController, getPlainValue, getStateful) {
+    var Timer = declare([Evented], {
+        timeout: 1000,
+        constructor: function (params) {
+            lang.mixin(this, params);
+        },
+        start: function () {
+            this.stop();
+            this.emit("start", {});
+            var self = this;
+            this._handle = setInterval(function () {
+                self.emit("tick", {});
+            }, this.timeout);
+        },
+        stop: function () {
+            if (this._handle) {
+                clearInterval(this._handle);
+                delete this._handle;
+                this.emit("stop", {});
+            }
+        }
+    });
+
     return declare("controllers.user.UserBrowser", [AbstractController, EditStoreRefController], {
 
         _viewTemplateString: "ws/rest/user/editTemplate",
@@ -63,21 +87,61 @@ define([
                     self.getStore(self.itemId)
                     self.view.enableScanning();
                 }, function () {
-                //show err dialog or others
+                    //show err dialog or others
                 });
             });
             view.on("scanningAction", function (params) {
                 var xhrArgs = {
-                      url: "ws/rest/user/scanning/" + self.itemId,
-                      postData: "SCANNING!!!",
-                      handleAs: "text",
-                      load: function(data){
-                      },
-                      error: function(error){
-                      }
+                    url: "ws/rest/user/scanning/" + self.itemId,
+                    postData: "SCANNING!!!",
+                    handleAs: "text",
+                    load: function (data) {
+                        self.view.content.scanningButton.set("disabled", true);
+                        dom.byId('errMessageBox').innerHTML = "";
+                        //30 sec to miteout for get status
+                        var count = 0;
+                        var t = new Timer({timeout: 2000});
+                        t.on("tick", function () {
+                            if (count < 15) {
+                                self.getScanResult(t);
+                            } else {
+                                dom.byId('errMessageBox').innerHTML = "Timeout of scanning!";
+                                self.view.content.scanningButton.set("disabled", false);
+                                t.stop();
+                            }
+                            count++;
+                        });
+                        t.start();
+                    },
+                    error: function (error) {
+                    }
                 }
                 var deferred = dojo.xhrPost(xhrArgs);
             });
+        },
+        getScanResult: function (timer) {
+            var self = this;
+            var xhrArgs = {
+                url: "ws/rest/user/scanningState/" + self.itemId,
+                postData: "Status!!!",
+                handleAs: "text",
+                load: function (data) {
+                    if (data.status == "NEED_CORRECTING" || data.status == "FAILURE") {
+                        dom.byId('errMessageBox').innerHTML = data.resultMessage;
+                    } else if (data.status == "SUCCESS") {
+                        dom.byId('errMessageBox').innerHTML = "";
+                        self.view.content.scanningButton.set("disabled", false);
+                        timer.stop();
+                    }
+                    if (data.status == "FAILURE") {
+                        self.view.content.scanningButton.set("disabled", false);
+                        timer.stop();
+                    }
+                },
+                error: function (error) {
+                }
+            }
+            var deferred = dojo.xhrPost(xhrArgs);
         },
         commit: function (callback, errback) {
 //            bcz data is plain -> remove actions with arrays. Data can only saved -> remove deleting actions

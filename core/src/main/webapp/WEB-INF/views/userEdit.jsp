@@ -14,7 +14,8 @@
                         <td>
                             <input type="text" data-dojo-attach-point="firstname"
                                    data-dojo-type="dijit/form/ValidationTextBox"
-                                   data-dojo-props="value: at('rel:', 'firstname'), required: true, maxLength: 64, trim: true"/>
+                                   data-dojo-props="value: at('rel:', 'firstname'), required: true, maxLength: 64, trim: true"
+                                   style="width:100%"/>
                         </td>
                     </tr>
                     <tr>
@@ -22,7 +23,8 @@
                         <td>
                             <input type="text" data-dojo-attach-point="firstname"
                                    data-dojo-type="dijit/form/ValidationTextBox"
-                                   data-dojo-props="value: at('rel:', 'middlename'), required: true, maxLength: 64, trim: true"/>
+                                   data-dojo-props="value: at('rel:', 'middlename'), required: true, maxLength: 64, trim: true"
+                                   style="width:100%"/>
                         </td>
                     </tr>
                     <tr>
@@ -30,17 +32,33 @@
                         <td>
                             <input type="text" data-dojo-attach-point="firstname"
                                    data-dojo-type="dijit/form/ValidationTextBox"
-                                   data-dojo-props="value: at('rel:', 'lastname'), required: true, maxLength: 64, trim: true"/>
+                                   data-dojo-props="value: at('rel:', 'lastname'), required: true, maxLength: 64, trim: true"
+                                   style="width:100%"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Scanning</td>
+                        <td>Scans</td>
                         <td>
-                            <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="scanningButton">
-                                Go!
+                            <%--<span>--%>
+                            <%--TODO--%>
+                            <%--1 of 3--%>
+                            <%--</span>--%>
+                            <%--<button data-dojo-type="dijit/form/Button" data-dojo-attach-point="removeLastButton"--%>
+                            <%--data-dojo-props="disabled:true">--%>
+                            <%--Remove last--%>
+                            <%--</button>--%>
+                            <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="scanningButton"
+                                    width="100%">
+                                Scanning
                             </button>
                         </td>
-                     </tr>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span id="errMessageBox" style="width: 100%;"/>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </form>
@@ -54,8 +72,8 @@
         <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="cancelButton">
             Cancel
         </button>
-                <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="applyButton">
-                    Apply
-                </button>
+        <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="applyButton">
+            Apply
+        </button>
     </div>
 </div>
