@@ -11,6 +11,12 @@ import java.io.Serializable;
  * Time: 16:14
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * @deprecated use {@link ScanExecutionResult}
+ */
+
+@Deprecated
 public class ScanResult implements Serializable {
 
     private ScanExecutionResult result;
