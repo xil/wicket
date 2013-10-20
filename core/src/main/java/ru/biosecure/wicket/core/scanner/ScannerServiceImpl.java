@@ -1,7 +1,6 @@
 package ru.biosecure.wicket.core.scanner;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
@@ -15,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,7 +26,7 @@ import java.util.List;
 public class ScannerServiceImpl implements ScannerService {
 
     private static final String LOG_PATH = "/home/palm-deamon.log";
-    public static final String PALM_DEAMON_MESSAGE = "/root/palm-message.log";
+    public static final String PALM_DAEMON_MESSAGE = "/root/palm-message.log";
     public static final String PATH_DAEMON = "/opt/palmd/Debug/palmd";
     private static final String[] START = {PATH_DAEMON};
     private static final String[] STOP = {"/opt/sh", "-c"};
@@ -114,18 +112,19 @@ public class ScannerServiceImpl implements ScannerService {
 
     @Override
     public ScanResult getResult(Person person) {
-        File logFile = new File(PALM_DEAMON_MESSAGE);
+        File logFile = new File(PALM_DAEMON_MESSAGE);
         ScanExecutionResult scanExecutionResult = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader(logFile));
             String line;
+            String lastNotEmptyLine = null;
             boolean next = false;
             while ((line = br.readLine()) != null) {
                 if (isNotEmpty(line)) {
-
+                    lastNotEmptyLine = line;
                 }
             }
-            scanExecutionResult = ScanExecutionResult.fromId(line);
+            scanExecutionResult = ScanExecutionResult.fromId(lastNotEmptyLine);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
