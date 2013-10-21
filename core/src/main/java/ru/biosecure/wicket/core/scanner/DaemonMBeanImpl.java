@@ -1,10 +1,13 @@
 package ru.biosecure.wicket.core.scanner;
 
 import org.springframework.util.CollectionUtils;
+import ru.biosecure.wicket.core.repo.PersonToScanRepository;
+import ru.biosecure.wicket.core.repo.ScannerTaskRepository;
 import ru.biosecure.wicket.global.core.app.PersonService;
 import ru.biosecure.wicket.global.core.app.ScanService;
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.PersonToScan;
+import ru.biosecure.wicket.global.core.entities.Scan;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
 import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
@@ -31,21 +34,19 @@ public class DaemonMBeanImpl implements DaemonMBean {
 
     @Inject
     private PersonService personService;
-
     @Inject
     private PersonBean personBean;
-
     @Inject
     private ScanService scanService;
-
     @Inject
-    private DataService dataService;
+    private PersonToScanRepository personToScanRepository;
+    @Inject
+    private ScannerTaskRepository scannerTaskRepository;
 
     @Override
     public void failed(Object id) {
         Person firstEmployee = personBean.getPerson();
-        ScannerTask scannerTask = createScannerTask(firstEmployee, ScanExecutionResult.FAILED);
-        dataService.commit(scannerTask);
+        createScannerTask(firstEmployee, ScanExecutionResult.FAILED);
     }
 
     @Override
@@ -53,11 +54,11 @@ public class DaemonMBeanImpl implements DaemonMBean {
         if (ids == null) return;
         List<Long> scanIdList = convertToLongList((String[]) ids);
         List<Person> persons = getPersonById(scanIdList);
-        List<BaseEntity> commitEntities = new ArrayList<BaseEntity>();
         if (CollectionUtils.isEmpty(persons)) {
             if (personBean.getPerson() != null) {
                 for (Long id : scanIdList) {
-                    createScanLink(commitEntities, id);
+                    Scan scan = createScan(id);
+                    createScanLink(scan);
                 }
                 personBean.setPerson(null);
             } else {
@@ -65,10 +66,19 @@ public class DaemonMBeanImpl implements DaemonMBean {
             }
         } else {
             Person firstEmployee = persons.iterator().next();
-            ScannerTask scannerTask = createScannerTask(firstEmployee, ScanExecutionResult.SUCCESS);
-            commitEntities.add(scannerTask);
+            createScannerTask(firstEmployee, ScanExecutionResult.SUCCESS);
         }
-        commit(commitEntities);
+    }
+
+    private Scan createScan(Long id) {
+        Scan scanById = scanService.getScanById(id);
+        if (scanById != null) return scanById;
+        Scan scan = new Scan();
+        scan.setId(id);
+        scan.setCreateDate(new Date());
+        scan.setCreatedBy(ADMIN);
+        scanService.addScan(scan);
+        return scan;
     }
 
     private List<Long> convertToLongList(String[] idStr) {
@@ -80,29 +90,22 @@ public class DaemonMBeanImpl implements DaemonMBean {
         return idList;
     }
 
-    private void createScanLink(List<BaseEntity> commitEntities, Long id) {
+    private void createScanLink(Scan scan) {
         PersonToScan scanLink = new PersonToScan();
         scanLink.setCreatedBy(ADMIN);
         scanLink.setCreateDate(new Date());
         scanLink.setPerson(personBean.getPerson());
-        scanLink.setScan(scanService.getScanById(id));
-        commitEntities.add(scanLink);
+        scanLink.setScan(scan);
+        personToScanRepository.saveAndFlush(scanLink);
     }
 
-    private ScannerTask createScannerTask(Person firstEmployee, ScanExecutionResult type) {
+    private void createScannerTask(Person firstEmployee, ScanExecutionResult type) {
         ScannerTask scannerTask = new ScannerTask();
         scannerTask.setCreatedBy(ADMIN);
         scannerTask.setCreateDate(new Date());
         scannerTask.setPerson(firstEmployee);
         scannerTask.setResult(type);
-        return scannerTask;
-
-    }
-
-    private void commit(List<BaseEntity> commitEntities) {
-        if (!CollectionUtils.isEmpty(commitEntities)) {
-            dataService.commit(commitEntities);
-        }
+        scannerTaskRepository.saveAndFlush(scannerTask);
     }
 
     private List<Person> getPersonById(List<Long> ids) {
