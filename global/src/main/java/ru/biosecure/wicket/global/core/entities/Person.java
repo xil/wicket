@@ -1,5 +1,6 @@
 package ru.biosecure.wicket.global.core.entities;
 
+import org.springframework.util.CollectionUtils;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.security.User;
 
@@ -26,6 +27,13 @@ public class Person extends BaseEntity {
 
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private List<PersonToScan> scans;
+
+    public int scansCount() {
+        if (!CollectionUtils.isEmpty(getScans())) {
+            return getScans().size();
+        }
+        return 0;
+    }
 
     public String getFirstname() {
         return firstname;

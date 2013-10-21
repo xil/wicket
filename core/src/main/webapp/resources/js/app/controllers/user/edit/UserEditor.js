@@ -3,6 +3,8 @@
  * Date: 06.07.13 21:06
  */
 define([
+    'dojox/mvc/Output',
+    'dijit/form/ComboBox',
     'dojo/Evented',
     'dojo/dom',
     "./UserEditorView",
@@ -17,7 +19,7 @@ define([
     "dojox/mvc/EditStoreRefController",
     "dojox/mvc/getPlainValue",
     "dojox/mvc/getStateful"
-], function (Evented, dom, UserEditorView, AbstractController, declare, lang, ItemFileReadStore, JsonRest, when, EditStoreRefController, getPlainValue, getStateful) {
+], function (Output, ComboBox, Evented, dom, UserEditorView, AbstractController, declare, lang, ItemFileReadStore, JsonRest, when, EditStoreRefController, getPlainValue, getStateful) {
     var Timer = declare([Evented], {
         timeout: 1000,
         constructor: function (params) {

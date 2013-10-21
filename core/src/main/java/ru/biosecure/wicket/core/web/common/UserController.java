@@ -12,7 +12,6 @@ import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,18 +34,15 @@ public class UserController implements SimpleController {
     @Inject
     private ScannerService scannerService;
 
-    @RequestMapping("/list")
+    //    TODO add paging, add sorting by fields
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, String>> getAll() {
+    public List<Map<String, Object>> getAll() {
         List<Person> persons = personRepository.findAll();
         if (persons != null) {
-            List<Map<String, String>> resList = new ArrayList<Map<String, String>>();
+            List<Map<String, Object>> resList = new ArrayList<Map<String, Object>>();
             for (Person p : persons) {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("firstname", p.getFirstname());
-                map.put("lastname", p.getLastname());
-                map.put("middlename", p.getMiddlename());
-                resList.add(map);
+                resList.add(PersonJson.getJson(p));
             }
             return resList;
         }
@@ -67,15 +63,15 @@ public class UserController implements SimpleController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @ResponseBody
-    public Person getPerson(@PathVariable String userId) {
-        return personRepository.findOne(Long.parseLong(userId));
+    public Map<String, Object> getPerson(@PathVariable String userId) {
+        return PersonJson.getJson(personRepository.findOne(Long.parseLong(userId)));
     }
 
     @ResponseBody
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public Person savePerson(@RequestBody Person item) {
+    public Map<String, Object> savePerson(@RequestBody Person item) {
         if (item != null && personRepository.findOne(item.getId()) != null) {
-            return personRepository.save(item);
+            return PersonJson.getJson(personRepository.save(item));
         }
         return null;
     }

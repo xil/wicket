@@ -15,9 +15,10 @@
                    data-dogo-id="grid" class="grid" style="height:100%;">
                 <thead>
                 <tr>
-                    <th field="firstname" width="280px">Firstname</th>
-                    <th field="middlename" width="280px">Middlename</th>
-                    <th field="lastname" width="280px">Lastname</th>
+                    <th field="firstname" width="260px">Firstname</th>
+                    <th field="middlename" width="260px">Middlename</th>
+                    <th field="lastname" width="255px">Lastname</th>
+                    <th field="scansCount" width="65px">Scans</th>
                 </tr>
                 </thead>
             </table>

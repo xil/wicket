@@ -37,16 +37,27 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Role</td>
+                        <td>
+                            <select data-dojo-attach-point="role"
+                                    data-dojo-type="dijit/form/ComboBox"
+                                    data-dojo-props="disabled:true"
+                                    style="width:100%">
+                                <option selected>User</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Scans</td>
                         <td>
-                            <%--<span>--%>
-                            <%--TODO--%>
-                            <%--1 of 3--%>
-                            <%--</span>--%>
-                            <%--<button data-dojo-type="dijit/form/Button" data-dojo-attach-point="removeLastButton"--%>
-                            <%--data-dojo-props="disabled:true">--%>
-                            <%--Remove last--%>
-                            <%--</button>--%>
+                            <span data-dojo-type="dojox/mvc/Output"
+                                  data-dojo-attach-point="scansCount"
+                                  data-dojo-props="value: at('rel:', 'scansCount')"></span> of 3
+                            <button data-dojo-type="dijit/form/Button"
+                                    data-dojo-attach-point="removeLastButton"
+                                    data-dojo-props="disabled:true">
+                                Remove last
+                            </button>
                             <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="scanningButton"
                                     width="100%">
                                 Scanning

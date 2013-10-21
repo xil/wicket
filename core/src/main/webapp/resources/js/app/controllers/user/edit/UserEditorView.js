@@ -3,6 +3,7 @@
  * Date: 06.07.13 22:37
  */
 define([
+    'dojo/i18n!../nls/messages',
     "dijit/Dialog",
 
     "dojo/_base/declare",
@@ -13,14 +14,16 @@ define([
 
     "views/common/AbstractView",
     "dijit/form/Form", "dijit/form/ValidationTextBox"
-], function (Dialog, declare, lang, Evented, Group, AbstractView) {
+], function (messages, Dialog, declare, lang, Evented, Group, AbstractView) {
     return declare([Dialog, Evented], {
 
         constructor: function (options) {
             lang.mixin(this, options);
 
             var initParams = this.contentParams;
+
             this.ctrl = initParams.ctrl;
+            this.title = this.ctrl.itemId ? messages.editExistUser : messages.editNewUser;
             var contentWidget = new (declare([AbstractView],
                 {
                     templateString: initParams.templateString,
@@ -54,16 +57,16 @@ define([
         cancel: function () {
             this.emit("closeAction", {});
         },
-        apply: function() {
-        //            TODO check validation
+        apply: function () {
+            //            TODO check validation
             if (this.content.form.validate()) {
                 this.emit("applyAction", {});
             }
         },
-        scanning: function() {
+        scanning: function () {
             this.emit("scanningAction", {});
         },
-        enableScanning: function() {
+        enableScanning: function () {
             this.contentParams.scanningEnabled = true;
             this.content.scanningButton.set("disabled", !this.contentParams.scanningEnabled);
         }

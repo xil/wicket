@@ -5,18 +5,9 @@ import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: inver
- * Date: 19.10.13
- * Time: 16:14
- * To change this template use File | Settings | File Templates.
+ * User: Alexey Nevinsky
+ * Date: 19.10.13 16:14
  */
-
-/**
- * @deprecated use {@link ScanExecutionResult}
- */
-
-@Deprecated
 public class ScanResult implements Serializable {
 
     private ScanExecutionResult result;
