@@ -16,9 +16,7 @@ import ru.biosecure.wicket.global.scanner.DataService;
 import ru.biosecure.wicket.global.scanner.PersonBean;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -53,8 +51,9 @@ public class DaemonMBeanImpl implements DaemonMBean {
     public void notifyId(Object ids) {
         if (ids == null) return;
         List<Long> scanIdList = convertToLongList((String[]) ids);
-        List<Person> persons = getPersonById(scanIdList);
-        if (CollectionUtils.isEmpty(persons)) {
+        Iterable<PersonToScan> personToScans = getPersonToScanById(scanIdList);
+        Iterator<PersonToScan> personToScansIterator = personToScans.iterator();
+        if (!personToScansIterator.hasNext()) {
             if (personBean.getPerson() != null) {
                 for (Long id : scanIdList) {
                     Scan scan = createScan(id);
@@ -65,16 +64,16 @@ public class DaemonMBeanImpl implements DaemonMBean {
                 //todo exeption
             }
         } else {
-            Person firstEmployee = persons.iterator().next();
+            PersonToScan personToScan = personToScansIterator.next();
+            if (personToScan == null) return;
+            Person firstEmployee = personToScan.getPerson();
             createScannerTask(firstEmployee, ScanExecutionResult.SUCCESS);
         }
     }
 
     private Scan createScan(Long id) {
-        Scan scanById = scanService.getScanById(id);
-        if (scanById != null) return scanById;
         Scan scan = new Scan();
-        scan.setId(id);
+        scan.setScanId(id);
         scan.setCreateDate(new Date());
         scan.setCreatedBy(ADMIN);
         scanService.addScan(scan);
@@ -108,7 +107,23 @@ public class DaemonMBeanImpl implements DaemonMBean {
         scannerTaskRepository.saveAndFlush(scannerTask);
     }
 
-    private List<Person> getPersonById(List<Long> ids) {
-        return (List<Person>) personService.findPersonByScanId(ids);
+    private List<PersonToScan> getPersonToScanById(List<Long> ids) {
+        List<Long> targetScanList = new ArrayList<Long>();
+        List<Scan> scanList = scanService.scanList();
+        for (Scan scan : scanList) {
+            if (ids.contains(scan.getScanId())) {
+                targetScanList.add(scan.getId());
+            }
+        }
+        List<PersonToScan> targetPersonToScanList = new ArrayList<PersonToScan>();
+        List<PersonToScan> personToScans = personToScanRepository.findAll();
+        for (PersonToScan personToScan : personToScans) {
+            Scan scan = personToScan.getScan();
+            if (scan == null) continue;
+            if (targetScanList.contains(scan.getId())) {
+                targetPersonToScanList.add(personToScan);
+            }
+        }
+        return personToScans;
     }
 }

@@ -10,6 +10,7 @@ package ru.biosecure.wicket.global.core.entities;
 
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,4 +21,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SCAN")
 public class Scan extends BaseEntity {
+
+    @Column(name = "SCAN_ID")
+    protected Long scanId;
+
+    public Long getScanId() {
+        return scanId;
+    }
+
+    public void setScanId(Long scanId) {
+        this.scanId = scanId;
+    }
 }
