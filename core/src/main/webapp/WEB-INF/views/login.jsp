@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Xil</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <%--<title><spring:message code="label.title" /></title>--%>
     <link href="<c:url value="/resources/css/bootstrap/bootstrap-responsive.min.css"/>" media="all" type="text/css"
@@ -25,6 +26,10 @@
             right: 0;
             width: 300px;
         }
+
+        #welcomeMess {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +45,7 @@
 <div class="container">
     <div class="row">
         <div class="span4 well">
-            <legend>Please Sign In</legend>
+            <legend id="welcomeMess">Welcome to Xil</legend>
             <c:if test="${not empty error}">
                 <div class="alert alert-error">
                     <a class="close" data-dismiss="alert" href="#">×</a><spring:message code="label.loginerror"/>

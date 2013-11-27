@@ -3,14 +3,16 @@
  * Date: 06.07.13 22:37
  */
 define([
+    'dojo/i18n!../nls/messages',
     "dojo/_base/declare", "dojo/_base/lang",
     "views/common/AbstractView",
 
     "dojox/grid/DataGrid"
-], function (declare, lang, AbstractView, DataGrid) {
+], function (messages, declare, lang, AbstractView, DataGrid) {
         return declare([AbstractView], {
             grid: null,
             selectedRowId: null,
+            i18n: messages,
 
             postCreate: function () {
                 this._initGrid();

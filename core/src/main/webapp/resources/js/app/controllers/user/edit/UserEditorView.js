@@ -16,7 +16,6 @@ define([
     "dijit/form/Form", "dijit/form/ValidationTextBox"
 ], function (messages, Dialog, declare, lang, Evented, Group, AbstractView) {
     return declare([Dialog, Evented], {
-
         constructor: function (options) {
             lang.mixin(this, options);
 
@@ -26,6 +25,7 @@ define([
             this.title = this.ctrl.itemId ? messages.editExistUser : messages.editNewUser;
             var contentWidget = new (declare([AbstractView],
                 {
+                    i18n: messages,
                     templateString: initParams.templateString,
                     ctrl: initParams.ctrl
                 }
@@ -38,7 +38,6 @@ define([
 
             var commitButton = this.content.commitButton;
             this.connect(commitButton, "onClick", "commit");
-            commitButton.set("label", "Commit");
             var cancelButton = this.content.cancelButton;
             this.connect(cancelButton, "onClick", "cancel");
             var applyButton = this.content.applyButton;

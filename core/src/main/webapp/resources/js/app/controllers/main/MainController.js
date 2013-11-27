@@ -1,8 +1,9 @@
 define([
     "dojo/_base/declare", "dojo/_base/lang", "dojo/Evented", "dojo/_base/Deferred", "dojo/_base/xhr",
+    "dojo/i18n!nls/messages",
 
     "views/main/MainPane"
-], function (declare, lang, Evented, Deferred, xhr, MainPane) {
+], function (declare, lang, Evented, Deferred, xhr, messages, MainPane) {
     return declare([Evented], {
 
         viewTemplateString: "",
@@ -25,7 +26,7 @@ define([
             });
             this.mainPane.on("clickMenuBarItem_users", lang.hitch(this, function () {
                 require(["controllers/user/browse/UserBrowser"], function (UserBrowser) {
-                    var currentTab = self.mainPane.addTab("Users", "usersBrowser");
+                    var currentTab = self.mainPane.addTab(messages.userBrowser_caption, "usersBrowser");
                     if (currentTab) {
                         var usersController = new UserBrowser({currentTab: currentTab});
                         usersController.init();
@@ -33,11 +34,11 @@ define([
                 });
             }));
             this.mainPane.on("clickMenuBarItem_idents", lang.hitch(this, function () {
-                var currentTab = self.mainPane.addTab("Identifications", "identifications");
+                var currentTab = self.mainPane.addTab(messages.userBrowser_identifications, "identifications");
 
             }));
             this.mainPane.on("clickMenuBarItem_wicket", lang.hitch(this, function () {
-                var currentTab = self.mainPane.addTab("Wicket", "wicket");
+                var currentTab = self.mainPane.addTab(messages.userBrowser_wicket, "wicket");
             }));
         },
         _getViewParams: function () {

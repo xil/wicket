@@ -4,10 +4,17 @@
          data-dojo-props="design:'headline'" style="height:100%">
         <div class="${baseClass}Title" data-dojo-attach-point="titleNode" data-dojo-type="dijit.layout.ContentPane"
              data-dojo-props="region:'top'">
-            <button data-dojo-attach-point="createButton" data-dojo-type="dijit/form/ToggleButton">Create</button>
-            <button data-dojo-attach-point="editButton" data-dojo-type="dijit/form/ToggleButton">Edit</button>
-            <button data-dojo-attach-point="removeButton" data-dojo-type="dijit/form/ToggleButton">Remove</button>
-            <button data-dojo-attach-point="refreshButton" data-dojo-type="dijit/form/ToggleButton">Refresh</button>
+            <button data-dojo-attach-point="createButton" data-dojo-type="dijit/form/ToggleButton">
+                \${i18n.button.create}
+            </button>
+            <button data-dojo-attach-point="editButton" data-dojo-type="dijit/form/ToggleButton">\${i18n.button.edit}
+            </button>
+            <button data-dojo-attach-point="removeButton" data-dojo-type="dijit/form/ToggleButton">
+                \${i18n.button.remove}
+            </button>
+            <button data-dojo-attach-point="refreshButton" data-dojo-type="dijit/form/ToggleButton">
+                \${i18n.button.refresh}
+            </button>
         </div>
         <div data-dojo-type="dijit.layout.ContentPane" class="${baseClass}Container"
              data-dojo-attach-point="containerNode" data-dojo-props="region:'center'">
@@ -15,10 +22,10 @@
                    data-dogo-id="grid" class="grid" style="height:100%;">
                 <thead>
                 <tr>
-                    <th field="firstname" width="260px">Firstname</th>
-                    <th field="middlename" width="260px">Middlename</th>
-                    <th field="lastname" width="255px">Lastname</th>
-                    <th field="scansCount" width="65px">Scans</th>
+                    <th field="firstname" width="260px">\${i18n.firstName}</th>
+                    <th field="middlename" width="260px">\${i18n.middleName}</th>
+                    <th field="lastname" width="235px">\${i18n.lastName}</th>
+                    <th field="scans" width="85px">\${i18n.scans}</th>
                 </tr>
                 </thead>
             </table>

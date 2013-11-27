@@ -11,6 +11,8 @@ define({
         menuBarItem_users: 'Users',
 
         userBrowser_caption: 'User Browser',
+        userBrowser_wicket: 'Wicket',
+        userBrowser_identifications: 'Identifications',
         userBrowser_userGrid_id: 'Id',
         userBrowser_userGrid_version: 'Version'
 

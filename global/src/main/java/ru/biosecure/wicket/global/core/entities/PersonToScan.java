@@ -15,11 +15,11 @@ import javax.persistence.*;
 @Table(name = "PERSON_TO_SCAN")
 public class PersonToScan extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID")
     private Person person;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SCAN_ID")
     private Scan scan;
 

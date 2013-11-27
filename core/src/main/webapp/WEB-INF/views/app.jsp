@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>MNSolution</title>
+    <title>Xil</title>
     <link rel="stylesheet" href="resources/js/lib/dijit/themes/claro/claro.css" media="screen"/>
     <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="resources/js/lib/dojox/grid/resources/claroGrid.css"/>

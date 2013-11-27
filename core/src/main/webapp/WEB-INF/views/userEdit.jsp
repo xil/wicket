@@ -9,8 +9,7 @@
 
                 <table class="form">
                     <tr>
-                        <%--TODO i18n!!!!!--%>
-                        <td>First Name</td>
+                        <td>\${i18n.firstName}</td>
                         <td>
                             <input type="text" data-dojo-attach-point="firstname"
                                    data-dojo-type="dijit/form/ValidationTextBox"
@@ -19,25 +18,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Middle Name</td>
+                        <td>\${i18n.middleName}</td>
                         <td>
-                            <input type="text" data-dojo-attach-point="firstname"
+                            <input type="text" data-dojo-attach-point="middlename"
                                    data-dojo-type="dijit/form/ValidationTextBox"
                                    data-dojo-props="value: at('rel:', 'middlename'), required: true, maxLength: 64, trim: true"
                                    style="width:100%"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Last Name</td>
+                        <td>\${i18n.lastName}</td>
                         <td>
-                            <input type="text" data-dojo-attach-point="firstname"
+                            <input type="text" data-dojo-attach-point="lastname"
                                    data-dojo-type="dijit/form/ValidationTextBox"
                                    data-dojo-props="value: at('rel:', 'lastname'), required: true, maxLength: 64, trim: true"
                                    style="width:100%"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Role</td>
+                        <td>\${i18n.userRole}</td>
                         <td>
                             <select data-dojo-attach-point="role"
                                     data-dojo-type="dijit/form/ComboBox"
@@ -48,19 +47,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Scans</td>
+                        <td>\${i18n.scans}</td>
                         <td>
                             <span data-dojo-type="dojox/mvc/Output"
                                   data-dojo-attach-point="scansCount"
-                                  data-dojo-props="value: at('rel:', 'scansCount')"></span> of 3
+                                  data-dojo-props="value: at('rel:', 'scans')"></span> \${i18n.of} 3
                             <button data-dojo-type="dijit/form/Button"
                                     data-dojo-attach-point="removeLastButton"
                                     data-dojo-props="disabled:true">
-                                Remove last
+                                \${i18n.button.removeLast}
                             </button>
                             <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="scanningButton"
                                     width="100%">
-                                Scanning
+                                \${i18n.button.scanning}
                             </button>
                         </td>
                     </tr>
@@ -78,13 +77,13 @@
     <div class="dijitDialogPaneActionBar">
         <div class="message" data-dojo-attach-point="messageNode"></div>
         <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="commitButton">
-            OK
+            \${i18n.button.commitAndClose}
         </button>
         <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="cancelButton">
-            Cancel
+            \${i18n.button.cancel}
         </button>
         <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="applyButton">
-            Apply
+            \${i18n.button.apply}
         </button>
     </div>
 </div>

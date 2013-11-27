@@ -28,7 +28,8 @@ public class Person extends BaseEntity {
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private List<PersonToScan> scans;
 
-    public int scansCount() {
+    @Transient
+    public int getScansCount() {
         if (!CollectionUtils.isEmpty(getScans())) {
             return getScans().size();
         }

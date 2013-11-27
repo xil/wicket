@@ -1,19 +1,19 @@
 package ru.biosecure.wicket.core.web.common;
 
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.biosecure.wicket.core.repo.PersonRepository;
 import ru.biosecure.wicket.core.repo.UserRepository;
 import ru.biosecure.wicket.core.web.SimpleController;
+import ru.biosecure.wicket.core.web.utils.JSONUtils;
 import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,16 +37,8 @@ public class UserController implements SimpleController {
     //    TODO add paging, add sorting by fields
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, Object>> getAll() {
-        List<Person> persons = personRepository.findAll();
-        if (persons != null) {
-            List<Map<String, Object>> resList = new ArrayList<Map<String, Object>>();
-            for (Person p : persons) {
-                resList.add(PersonJson.getJson(p));
-            }
-            return resList;
-        }
-        return null;
+    public ResponseEntity<String> getAll() {
+        return JSONUtils.toJson(personRepository.findAll());
     }
 
     @Override
@@ -63,23 +55,29 @@ public class UserController implements SimpleController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getPerson(@PathVariable String userId) {
-        return PersonJson.getJson(personRepository.findOne(Long.parseLong(userId)));
+    public ResponseEntity<String> getPerson(@PathVariable String userId) {
+        return JSONUtils.toJson(personRepository.findOne(Long.parseLong(userId)));
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public Map<String, Object> savePerson(@RequestBody Person item) {
-        if (item != null && personRepository.findOne(item.getId()) != null) {
-            return PersonJson.getJson(personRepository.save(item));
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, headers = "Accept=application/json")
+    public ResponseEntity<String> savePerson(@PathVariable long userId, @RequestBody String item) {
+        Person p = null;
+        if (item != null && personRepository.findOne(userId) != null) {
+            Gson gson = new Gson();
+            p = gson.fromJson(item, Person.class);
+            p.setId(userId);
+            p = personRepository.save(p);
         }
-        return null;
+        return JSONUtils.toJson(p);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public Person addPerson(@RequestBody Person item) {
-        return personRepository.saveAndFlush(item);
+    public ResponseEntity<String> addPerson(@RequestBody String item) {
+        Gson gson = new Gson();
+        Person p = gson.fromJson(item, Person.class);
+        return JSONUtils.toJson(personRepository.saveAndFlush(p));
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)

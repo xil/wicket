@@ -28,3 +28,11 @@ html, body {
 #errMessageBox {
     color: red;
 }
+
+.claro .dijitContentPane {
+    padding: 5px;
+}
+
+.dijitLayoutContainerPane.dijitAlignTop {
+    padding-bottom: 0;
+}
