@@ -1,7 +1,12 @@
 package ru.biosecure.wicket.core.web.common;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +19,10 @@ import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +47,17 @@ public class UserController implements SimpleController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> getAll() {
-        return JSONUtils.toJson(personRepository.findAll());
+        List<JsonObject> list = new ArrayList<JsonObject>();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        for (Person p : personRepository.findAll()) {
+            p.getScans();
+            String objAsJson = gson.toJson(p);
+            Map<String, Object> map = Collections.singletonMap("scansCount", (Object) p.getScansCount());
+            JsonObject jsonObject = gson.fromJson(objAsJson, JsonElement.class).getAsJsonObject();
+            JSONUtils.addPropsToJsonObject(jsonObject, map);
+            list.add(jsonObject);
+        }
+        return JSONUtils.toJson(list, HttpStatus.OK);
     }
 
     @Override
@@ -56,7 +75,12 @@ public class UserController implements SimpleController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> getPerson(@PathVariable String userId) {
-        return JSONUtils.toJson(personRepository.findOne(Long.parseLong(userId)));
+        Person p = personRepository.findOne(Long.parseLong(userId));
+        String str = JSONUtils.getJsonObject(p, Collections.singletonMap("scansCount", (Object) p.getScansCount()));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        return new ResponseEntity<String>(str, headers, HttpStatus.OK);
     }
 
     @ResponseBody

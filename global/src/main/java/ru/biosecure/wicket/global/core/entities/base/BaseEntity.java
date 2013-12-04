@@ -1,5 +1,7 @@
 package ru.biosecure.wicket.global.core.entities.base;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
+    @Expose
     protected Long id;
 
     @Column(name = "CREATED_BY", length = 60)
@@ -41,6 +44,7 @@ public class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date deleteDate;
 
+    @Expose
     @Version
     @Column(name = "VERSION")
     protected Integer version;

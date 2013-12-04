@@ -25,7 +25,7 @@
                     <th field="firstname" width="260px">\${i18n.firstName}</th>
                     <th field="middlename" width="260px">\${i18n.middleName}</th>
                     <th field="lastname" width="235px">\${i18n.lastName}</th>
-                    <th field="scans" width="85px">\${i18n.scans}</th>
+                    <th field="scansCount" width="85px">\${i18n.scans}</th>
                 </tr>
                 </thead>
             </table>

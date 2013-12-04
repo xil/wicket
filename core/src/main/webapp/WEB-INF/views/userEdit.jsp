@@ -51,7 +51,7 @@
                         <td>
                             <span data-dojo-type="dojox/mvc/Output"
                                   data-dojo-attach-point="scansCount"
-                                  data-dojo-props="value: at('rel:', 'scans')"></span> \${i18n.of} 3
+                                  data-dojo-props="value: at('rel:', 'scansCount')"></span> \${i18n.of} 3
                             <button data-dojo-type="dijit/form/Button"
                                     data-dojo-attach-point="removeLastButton"
                                     data-dojo-props="disabled:true">

@@ -1,5 +1,6 @@
 package ru.biosecure.wicket.global.core.entities;
 
+import com.google.gson.annotations.Expose;
 import org.springframework.util.CollectionUtils;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.security.User;
@@ -12,12 +13,15 @@ import java.util.List;
 public class Person extends BaseEntity {
     private static final long serialVersionUID = 4410504516807797206L;
 
+    @Expose
     @Column(name = "FIRSTNAME")
     private String firstname;
 
+    @Expose
     @Column(name = "MIDDLENAME")
     private String middlename;
 
+    @Expose
     @Column(name = "LASTNAME")
     private String lastname;
 
