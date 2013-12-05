@@ -100,7 +100,7 @@ define([
 //            viewStore.onDelete = function () {
 //                self._refreshStore();
 //            }
-            this.view.usersGrid.setStore(viewStore, "/list");
+            this.view.usersGrid.setStore(viewStore, "list?");
         }
 
     });

@@ -37,7 +37,11 @@ define([
             },
             _initGrid: function () {
                 var self = this;
-                this.usersGrid.setStore(this.viewStore, "list");
+                this.usersGrid.setStore(this.viewStore, "list?");
+                this.usersGrid.canSort = function (inSortInfo) {
+                    return inSortInfo == 4 ?
+                        false : true
+                };
                 this.usersGrid.on("rowClick", lang.hitch(this, function (e) {
                     this.selectedRowId = e.rowIndex;
                 }));

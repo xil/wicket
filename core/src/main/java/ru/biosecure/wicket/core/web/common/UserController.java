@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.log4j.Logger;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,8 @@ import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,13 +42,31 @@ public class UserController implements SimpleController {
     @Inject
     private ScannerService scannerService;
 
-    //    TODO add paging, add sorting by fields
+    //    TODO add paging, rework sorting by fields
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> getAll() {
+    public ResponseEntity<String> getAll(HttpServletRequest request) {
+        Map<String, Object> params = request.getParameterMap();
+        Set<String> keys = params.keySet();
+        Boolean asc = null;
+        String fieldName = "";
+        for (String key : keys) {
+            if (key.contains("sort")) {
+                //sort(+fieldName)
+                asc = !key.contains("-");
+                fieldName = key.substring(key.indexOf("(") + 2, key.length() - 1);
+            }
+        }
+
         List<JsonObject> list = new ArrayList<JsonObject>();
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        for (Person p : personRepository.findAll()) {
+        List<Person> persons;
+        if (asc != null) {
+            persons = personRepository.findAll(new Sort(asc ? Sort.Direction.ASC : Sort.Direction.DESC, Arrays.asList(fieldName)));
+        } else {
+            persons = personRepository.findAll();
+        }
+        for (Person p : persons) {
             p.getScans();
             String objAsJson = gson.toJson(p);
             Map<String, Object> map = Collections.singletonMap("scansCount", (Object) p.getScansCount());
@@ -70,7 +87,6 @@ public class UserController implements SimpleController {
     public String getEditTemplate() {
         return "userEdit";
     }
-
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @ResponseBody
