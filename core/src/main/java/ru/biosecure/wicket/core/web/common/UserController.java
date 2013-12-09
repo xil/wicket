@@ -15,7 +15,7 @@ import ru.biosecure.wicket.core.repo.PersonRepository;
 import ru.biosecure.wicket.core.repo.UserRepository;
 import ru.biosecure.wicket.core.web.SimpleController;
 import ru.biosecure.wicket.core.web.utils.JSONUtils;
-import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScanResult;
 import ru.biosecure.wicket.global.scanner.ScannerService;
 

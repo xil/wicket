@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "SEC_ROLE")
-public class Role extends BaseEntity implements GrantedAuthority {
+public class SecRole extends BaseEntity implements GrantedAuthority {
     private static final long serialVersionUID = -110283291414275205L;
 
     @Column(name = "NAME", length = 100)
@@ -21,11 +21,11 @@ public class Role extends BaseEntity implements GrantedAuthority {
     @Column(name = "DESCRIPTION", length = 500)
     protected String description;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Permission.class)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = SecPermission.class)
     @JoinTable(name = "ROLE_TO_PERMISSION",
             joinColumns = {@JoinColumn(name = "ROLE_ID", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID", nullable = false, updatable = false)})
-    protected Collection<Permission> permissions;
+    protected Collection<SecPermission> permissions;
 
     @Override
     public String getAuthority() {
@@ -48,11 +48,11 @@ public class Role extends BaseEntity implements GrantedAuthority {
         this.description = description;
     }
 
-    public Collection<Permission> getPermissions() {
+    public Collection<SecPermission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Collection<Permission> permissions) {
+    public void setPermissions(Collection<SecPermission> permissions) {
         this.permissions = permissions;
     }
 }

@@ -3,9 +3,9 @@ package ru.biosecure.wicket.core.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.biosecure.wicket.global.core.app.PersonService;
-import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.core.repo.PersonRepository;
+import ru.biosecure.wicket.global.core.app.PersonService;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 import javax.inject.Inject;
 import java.util.List;

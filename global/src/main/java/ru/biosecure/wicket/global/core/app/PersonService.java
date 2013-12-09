@@ -1,6 +1,6 @@
 package ru.biosecure.wicket.global.core.app;
 
-import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 import java.util.List;
 

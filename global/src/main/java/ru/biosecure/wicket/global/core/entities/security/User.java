@@ -22,11 +22,11 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "PASSWORD")
     protected String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Role.class)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = SecRole.class)
     @JoinTable(name = "USER_TO_ROLES",
             joinColumns = {@JoinColumn(name = "USER_ID", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", nullable = false, updatable = false)})
-    protected Collection<Role> roles;
+    protected Collection<SecRole> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,11 +75,11 @@ public class User extends BaseEntity implements UserDetails {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Collection<SecRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Collection<SecRole> roles) {
         this.roles = roles;
     }
 }

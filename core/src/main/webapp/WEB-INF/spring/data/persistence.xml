@@ -7,9 +7,9 @@
         </properties>
         <mapping-file>/WEB-INF/spring/data/orm.xml</mapping-file>
         <class>ru.biosecure.wicket.global.core.entities.security.User</class>
-        <class>ru.biosecure.wicket.global.core.entities.security.Role</class>
-        <class>ru.biosecure.wicket.global.core.entities.security.Permission</class>
-        <class>ru.biosecure.wicket.global.core.entities.Person</class>
+        <class>ru.biosecure.wicket.global.core.entities.security.SecRole</class>
+        <class>ru.biosecure.wicket.global.core.entities.security.SecPermission</class>
+        <class>ru.biosecure.wicket.global.core.entities.person.Person</class>
         <class>ru.biosecure.wicket.global.core.entities.scanner.ScannerTask</class>
         <class>ru.biosecure.wicket.global.core.entities.PersonToScan</class>
         <class>ru.biosecure.wicket.global.core.entities.Scan</class>

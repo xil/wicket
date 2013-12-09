@@ -1,7 +1,7 @@
 package ru.biosecure.wicket.core.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 import java.util.Collections;
 import java.util.List;

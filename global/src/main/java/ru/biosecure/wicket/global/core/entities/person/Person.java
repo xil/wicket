@@ -1,7 +1,8 @@
-package ru.biosecure.wicket.global.core.entities;
+package ru.biosecure.wicket.global.core.entities.person;
 
 import com.google.gson.annotations.Expose;
 import org.springframework.util.CollectionUtils;
+import ru.biosecure.wicket.global.core.entities.PersonToScan;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
 import ru.biosecure.wicket.global.core.entities.security.User;
 

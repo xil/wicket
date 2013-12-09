@@ -1,6 +1,7 @@
 package ru.biosecure.wicket.global.core.entities;
 
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 import javax.persistence.*;
 

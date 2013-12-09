@@ -15,6 +15,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:devices-spring.xml
             /WEB-INF/spring/security.xml
             /WEB-INF/spring/applicationContext.xml
         </param-value>
@@ -41,18 +42,18 @@
     </servlet-mapping>
 
     <!--<servlet>-->
-        <!--<servlet-name>restServlet</servlet-name>-->
-        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>contextConfigLocation</param-name>-->
-            <!--<param-value>/WEB-INF/spring/servletContext.xml</param-value>-->
-        <!--</init-param>-->
-        <!--&lt;!&ndash;<load-on-startup>1</load-on-startup>&ndash;&gt;-->
+    <!--<servlet-name>restServlet</servlet-name>-->
+    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--<init-param>-->
+    <!--<param-name>contextConfigLocation</param-name>-->
+    <!--<param-value>/WEB-INF/spring/servletContext.xml</param-value>-->
+    <!--</init-param>-->
+    <!--&lt;!&ndash;<load-on-startup>1</load-on-startup>&ndash;&gt;-->
     <!--</servlet>-->
 
     <!--<servlet-mapping>-->
-        <!--<servlet-name>restServlet</servlet-name>-->
-        <!--<url-pattern>/ws/rest/*</url-pattern>-->
+    <!--<servlet-name>restServlet</servlet-name>-->
+    <!--<url-pattern>/ws/rest/*</url-pattern>-->
     <!--</servlet-mapping>-->
 
     <!-- Фильтр для перекодировки в utf8 -->

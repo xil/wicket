@@ -2,8 +2,8 @@ package ru.biosecure.wicket.core.service;
 
 import org.springframework.stereotype.Service;
 import ru.biosecure.wicket.core.repo.ScanRepository;
-import ru.biosecure.wicket.global.core.app.ScanService;
 import ru.biosecure.wicket.global.core.entities.Scan;
+import ru.biosecure.wicket.global.scanner.ScanService;
 
 import javax.inject.Inject;
 import java.util.List;

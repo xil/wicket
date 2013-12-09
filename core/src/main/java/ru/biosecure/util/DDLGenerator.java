@@ -3,12 +3,12 @@ package ru.biosecure.util;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
-import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.PersonToScan;
 import ru.biosecure.wicket.global.core.entities.Scan;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
-import ru.biosecure.wicket.global.core.entities.security.Permission;
-import ru.biosecure.wicket.global.core.entities.security.Role;
+import ru.biosecure.wicket.global.core.entities.security.SecPermission;
+import ru.biosecure.wicket.global.core.entities.security.SecRole;
 import ru.biosecure.wicket.global.core.entities.security.User;
 
 /**
@@ -23,9 +23,9 @@ public class DDLGenerator {
     public static void main(String[] args) {
         new DDLGenerator().execute(Dialect.MYSQL,
                 ScannerTask.class,
-                Role.class,
+                SecRole.class,
                 Person.class,
-                Permission.class,
+                SecPermission.class,
                 User.class,
                 PersonToScan.class,
                 Scan.class

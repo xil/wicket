@@ -1,17 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf8" %>
 <div style="height: 100%; width: 100%">
-    <div id="userBrowserLayout" data-dojo-type="dijit/layout/LayoutContainer" data-dojo-attach-point="layout"
+    <div id="identificationBrowserLayout" data-dojo-type="dijit/layout/LayoutContainer" data-dojo-attach-point="layout"
          data-dojo-props="design:'headline'" style="height:100%">
         <div class="\${baseClass}Title" data-dojo-attach-point="titleNode" data-dojo-type="dijit.layout.ContentPane"
              data-dojo-props="region:'top'">
-            <button data-dojo-attach-point="createButton" data-dojo-type="dijit/form/ToggleButton">
-                \${i18n.button.create}
-            </button>
-            <button data-dojo-attach-point="editButton" data-dojo-type="dijit/form/ToggleButton">\${i18n.button.edit}
-            </button>
-            <button data-dojo-attach-point="removeButton" data-dojo-type="dijit/form/ToggleButton">
-                \${i18n.button.remove}
-            </button>
             <button data-dojo-attach-point="refreshButton" data-dojo-type="dijit/form/ToggleButton">
                 \${i18n.button.refresh}
             </button>

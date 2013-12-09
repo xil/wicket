@@ -1,7 +1,7 @@
 package ru.biosecure.wicket.core.scanner;
 
 import org.springframework.stereotype.Service;
-import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 import ru.biosecure.wicket.global.scanner.PersonBean;
 
 /**

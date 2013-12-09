@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int-ip="http://www.springframework.org/schema/integration/ip"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+       http://www.springframework.org/schema/integration/ip
+       http://www.springframework.org/schema/integration/ip/spring-integration-ip-2.2.xsd">
+
+    <!--TODO replace property port to property from file-->
+    <bean id="javaSerializer"
+          class="org.springframework.core.serializer.DefaultSerializer"/>
+    <bean id="javaDeserializer"
+          class="org.springframework.core.serializer.DefaultDeserializer"/>
+
+    <int-ip:tcp-connection-factory id="palmdServer"
+                                   type="server"
+                                   port="8081"
+                                   deserializer="javaDeserializer"
+                                   serializer="javaSerializer"/>
+</beans>

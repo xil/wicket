@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "SEC_PERMISSION")
-public class Permission extends BaseEntity {
+public class SecPermission extends BaseEntity {
     private static final long serialVersionUID = -3624922556006086151L;
 
     @Column(name = "PERMISSION_OBJECT")
@@ -20,11 +20,11 @@ public class Permission extends BaseEntity {
     @Column(name = "ACCESS")
     protected Boolean access;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Role.class)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = SecRole.class)
     @JoinTable(name = "ROLE_TO_PERMISSION",
             joinColumns = {@JoinColumn(name = "PERMISSION_ID", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", nullable = false, updatable = false)})
-    protected Collection<Role> roles;
+    protected Collection<SecRole> roles;
 
     public String getPermissionObject() {
         return permissionObject;

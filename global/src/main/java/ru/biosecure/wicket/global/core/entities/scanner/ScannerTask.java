@@ -1,7 +1,7 @@
 package ru.biosecure.wicket.global.core.entities.scanner;
 
-import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.base.BaseEntity;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 
 import javax.persistence.*;

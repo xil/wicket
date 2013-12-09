@@ -4,14 +4,14 @@ import ru.biosecure.wicket.core.repo.PersonToScanRepository;
 import ru.biosecure.wicket.core.repo.ScanRepository;
 import ru.biosecure.wicket.core.repo.ScannerTaskRepository;
 import ru.biosecure.wicket.global.core.app.PersonService;
-import ru.biosecure.wicket.global.core.app.ScanService;
-import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.global.core.entities.PersonToScan;
 import ru.biosecure.wicket.global.core.entities.Scan;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 import ru.biosecure.wicket.global.core.entities.scanner.ScannerTask;
 import ru.biosecure.wicket.global.core.enums.ScanExecutionResult;
 import ru.biosecure.wicket.global.scanner.DaemonMBean;
 import ru.biosecure.wicket.global.scanner.PersonBean;
+import ru.biosecure.wicket.global.scanner.ScanService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

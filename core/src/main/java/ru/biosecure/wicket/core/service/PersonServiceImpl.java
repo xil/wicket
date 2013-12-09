@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.biosecure.wicket.core.dao.PersonDAO;
-import ru.biosecure.wicket.global.core.app.PersonService;
-import ru.biosecure.wicket.global.core.entities.Person;
 import ru.biosecure.wicket.core.repo.PersonRepository;
+import ru.biosecure.wicket.global.core.app.PersonService;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

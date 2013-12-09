@@ -1,7 +1,7 @@
 package ru.biosecure.wicket.core.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.biosecure.wicket.global.core.entities.Person;
+import ru.biosecure.wicket.global.core.entities.person.Person;
 
 /**
  * Created with IntelliJ IDEA.
