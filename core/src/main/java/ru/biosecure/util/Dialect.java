@@ -10,7 +10,8 @@ package ru.biosecure.util;
 public enum Dialect {
     MYSQL("org.hibernate.dialect.MySQLDialect"),
     ORACLE("org.unhcr.omss.db.oracle.OracleDialectDeferredFK"),
-    SYBASE("org.hibernate.dialect.SybaseAnywhereDialect");
+    SYBASE("org.hibernate.dialect.SybaseAnywhereDialect"),
+    MSSQL("org.hibernate.dialect.SQLServerDialect");
 
     private String className;
 

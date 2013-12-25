@@ -3,7 +3,7 @@
     <persistence-unit name="hibernatePersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
         </properties>
         <mapping-file>/WEB-INF/spring/data/orm.xml</mapping-file>
         <class>ru.biosecure.wicket.global.core.entities.security.User</class>

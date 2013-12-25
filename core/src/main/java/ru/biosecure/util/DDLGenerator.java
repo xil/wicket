@@ -21,7 +21,7 @@ import ru.biosecure.wicket.global.core.entities.security.User;
 public class DDLGenerator {
 
     public static void main(String[] args) {
-        new DDLGenerator().execute(Dialect.MYSQL,
+        new DDLGenerator().execute(Dialect.MSSQL,
                 ScannerTask.class,
                 Role.class,
                 Person.class,
