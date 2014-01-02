@@ -16,7 +16,7 @@
    		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <!-- app.properties file -->
-    <context:property-placeholder properties-ref="deployProperties"/>
+    <context:property-placeholder properties-ref="appProperties"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

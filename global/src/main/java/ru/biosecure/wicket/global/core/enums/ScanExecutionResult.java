@@ -51,63 +51,10 @@ public enum ScanExecutionResult implements EnumClass<String> {
     }
 
     public static ScanExecutionResult fromId(String id) {
-        if ("EXECUTING".equals(id))
-            return EXECUTING;
-        else if ("SUCCESS".equals(id))
-            return SUCCESS;
-        else if ("NEED_CORRECTING".equals(id))
-            return NEED_CORRECTING;
-        else if ("PvAPI_NOTIFY_CAP_GUID_START".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_START;
-        else if ("PvAPI_NOTIFY_CAP_GUID_BADIMAGE".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_BADIMAGE;
-        else if ("PvAPI_NOTIFY_CAP_GUID_NO_HANDS".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_NO_HANDS;
-        else if ("PvAPI_NOTIFY_CAP_GUID_MOVING".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_MOVING;
-        else if ("PvAPI_NOTIFY_CAP_GUID_LESSINFO".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_LESSINFO;
-        else if ("PvAPI_NOTIFY_CAP_GUID_RIGHT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_RIGHT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_DOWN".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_DOWN;
-        else if ("PvAPI_NOTIFY_CAP_GUID_LEFT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_LEFT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_UP".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_UP;
-        else if ("PvAPI_NOTIFY_CAP_GUID_FAR".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_FAR;
-        else if ("PvAPI_NOTIFY_CAP_GUID_NEAR".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_NEAR;
-        else if ("PvAPI_NOTIFY_CAP_GUID_CAPTURING".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_CAPTURING;
-        else if ("PvAPI_NOTIFY_CAP_GUID_PITCH_UP".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_PITCH_UP;
-        else if ("PvAPI_NOTIFY_CAP_GUID_PITCH_DOWN".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_PITCH_DOWN;
-        else if ("PvAPI_NOTIFY_CAP_GUID_ROLL_RIGHT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_ROLL_RIGHT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_ROLL_LEFT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_ROLL_LEFT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_YAW_RIGHT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_YAW_RIGHT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_YAW_LEFT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_YAW_LEFT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_ROUND".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_ROUND;
-        else if ("PvAPI_NOTIFY_CAP_GUID_ADJUST_LIGHT".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_ADJUST_LIGHT;
-        else if ("PvAPI_NOTIFY_CAP_GUID_ADJUST_NG".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_ADJUST_NG;
-        else if ("PvAPI_NOTIFY_CAP_GUID_PHASE_END".equals(id))
-            return PvAPI_NOTIFY_CAP_GUID_PHASE_END;
-        else if ("Уберите руку с сенсора".equals(id))
-            return CLEAN;
-        else if ("FAILED".equals(id))
-            return FAILED;
-        else if ("Не получилось подключиться к устройству".equals(id))
-            return CANNOT_CONNECT;
-        else
-            return UNDEFINED;
+        for (ScanExecutionResult result : values()) {
+            if (result.id.equals(id))
+                return result;
+        }
+        return null;
     }
 }

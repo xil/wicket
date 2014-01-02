@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-    <context:property-placeholder properties-ref="deployProperties"/>
+    <context:property-placeholder properties-ref="appProperties"/>
 
     <!-- Activates various annotations -->
     <context:annotation-config/>
@@ -49,7 +49,7 @@
     <!--TODO add for normal logging-->
     <!--<import resource="logging/trace-context.xml"/>-->
 
-    <bean id="deployProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+    <bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
           p:location="/WEB-INF/app.properties"/>
 
 </beans>
